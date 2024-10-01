@@ -93,14 +93,39 @@
                                             </div> 
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label" for="aadhaar_number">Certificate (If Any)</label>
+                                            <label class="form-label" for="pan_card">Pan Card</label>
                                             <div class="mb-3">
-                                                <img class="img-thumbnail rounded me-2" id="certificate_blah" alt="" width="200" src="" data-holder-rendered="true" style="display: none;">
+                                                <img class="img-thumbnail rounded me-2" id="pan_card_blah" alt="" width="200" src="" data-holder-rendered="true" style="display: none;">
                                             </div>
                                             <div class="mb-0">
-                                                <input class="form-control" name="certificate" type="file" id="certificate">
+                                                <input class="form-control" name="pan_card" type="file" id="pan_card" required>
                                             </div> 
                                         </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <h2 class="text-center">Certificate</h2>
+                                        <table width="100%" cellpadding="5" cellspacing="5" id="table_repeter">
+                                            <tr>
+                                                <th width="20%">Certificate Name</th>
+                                                <th width="10%">Certified Date</th>
+                                                <th width="20%">Certificate Image</th>
+                                                <th width="4%">&nbsp;</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="certificate_name[]" id="certificate_name" class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <input type="date" name="certificate_date[]" id="certificate_date" class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" name="certificate_image[]" type="file" id="certificate_image">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div  id="more1"><a class="btn btn-success btn-sm float-end" href="javascript:;" onClick="showMore_edit('field_1');"><i class="fa fa-plus"></i>Add More</a></div>
+                                        <p>&nbsp;</p>
+                                        <input type="hidden" name="cont" id="cont" value="1" />
                                     </div>
                                 </div>
                             </div>
@@ -169,15 +194,59 @@
                 reader.readAsDataURL(input.files[0]);
             }
         });
-        $('#certificate').on('change', function() {
+        $('#pan_card').on('change', function() {
             var input = this;
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#certificate_blah').attr('src', e.target.result).css('display', 'block');
+                    $('#pan_card_blah').attr('src', e.target.result).css('display', 'block');
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         });
+    </script>
+
+    <script>
+		function showMore_edit(id){
+            var idd = id.split("_");
+            var idty = parseInt(idd[1]);
+            idty = idty + 1;
+            var table = document.getElementById("table_repeter");
+            console.log(table);
+            var rowCount = table.rows.length;
+            
+            var row = table.insertRow(rowCount);
+            var cell0 = row.insertCell(0);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            console.log(cell0,cell1, cell2, cell3);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            document.getElementById("cont").value = idty;
+               
+				
+			cell1.innerHTML = '<input type="text" name="certificate_name[]" id="certificate_name" class="form-control"/>';
+				
+			cell2.innerHTML = '<input type="date" name="certificate_date[]" id="certificate_date" class="form-control"/>';
+
+            cell3.innerHTML = '<input class="form-control" name="certificate_image[]" type="file" id="certificate_image">';
+            
+            cell4.innerHTML = "<a  href=\"javascript:;\" class=\"btn btn-danger btn-sm\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Remove this Item\" onClick=\"deleteRow(this)\"><i class=\"fadeIn animated bx bx-trash\"></i></a>";
+                 
+
+				  
+			document.getElementById("more1").innerHTML = "<a class=\"btn btn-success btn-sm float-end\" href=\"javascript:;\" onClick=\"showMore_edit('field_" + idty + "');\"><i class=\"fa fa-plus\"></i>Add More</a>";
+                
+                
+        }
+
+        function deleteRow(btn) {
+            if (confirm("Are You Sure?") == true) {
+                var row = btn.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            } else { }
+		}
     </script>
     @endsection

@@ -21,10 +21,10 @@ class BookingController extends Controller
     public function __construct(){
         $this->view_path = 'admin.bookings.';
 
-        $this->middleware('role_or_permission:Booking Show', ['only' => ['index','today_bookings','today_appointments','show','process_prescription']]);
-        $this->middleware('role_or_permission:Booking Create', ['only' => ['create','store','process_prescription']]);
+        $this->middleware('role_or_permission:Booking Show', ['only' => ['index','today_bookings','today_appointments','show','process_prescription','delete_prescription_note','delete_prescription_documents']]);
+        $this->middleware('role_or_permission:Booking Create', ['only' => ['create','store']]);
         $this->middleware('role_or_permission:Booking Edit', ['only' => ['edit','update']]);
-        $this->middleware('role_or_permission:Booking Delete', ['only' => ['destroy','delete_prescription_note','delete_prescription_documents']]);
+        $this->middleware('role_or_permission:Booking Delete', ['only' => ['destroy']]);
     }
 
     public function index()

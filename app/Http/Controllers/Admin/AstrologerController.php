@@ -41,6 +41,7 @@ class AstrologerController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
             'name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
             'email' => 'required|email|unique:users,email',
@@ -96,13 +97,13 @@ class AstrologerController extends Controller
                 $astrologer->aadhaar_back_side = $filePath;
             }
 
-            if ($request->hasFile('certificate')) {
-                $img = $request->file('certificate');
+            if ($request->hasFile('pan_card')) {
+                $img = $request->file('pan_card');
                 $filename = time(). '_' .$img->getClientOriginalName();
                 $directory = public_path('web-directory/astrologer/documents');
                 $img->move($directory, $filename);
                 $filePath = "web-directory/astrologer/documents/".$filename;
-                $astrologer->certificate = $filePath;
+                $astrologer->pan_card = $filePath;
             }
 
             $astrologer->syncRoles('Astrologer');

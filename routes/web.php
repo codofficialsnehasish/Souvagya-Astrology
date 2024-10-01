@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 use App\Http\Controllers\Admin\{
     AuthController,
     Dashboard,
@@ -24,7 +13,29 @@ use App\Http\Controllers\Admin\{
     AttendanceController,
 };
 
-Route::get('/',[AuthController::class,'login'])->name('admin.login');
+use App\Http\Controllers\LocationController;
+
+use App\Http\Controllers\Site\{
+    HomeController,
+    Authentication,
+    UserDashboard,
+};
+
+// ========================= Site Routes ==========================
+
+Route::get('/',[HomeController::class,'index'])->name('home');
+Route::post('/send-verification-code', [Authentication::class, 'sendVerificationCode'])->name('send-verification-code');
+Route::post('/verify-code', [Authentication::class, 'verifyCode'])->name('verify-code');
+Route::post('/process-submit-details',[Authentication::class,'process_submit_details'])->name('process-submit-details')->middleware('auth');
+Route::get('/user-logout',[Authentication::class,'user_logout'])->name('user-logout')->middleware('auth');
+Route::post('/process-update-profile',[Authentication::class,'process_update_profile'])->name('process-update-profile')->middleware('auth');
+
+Route::get('/user-dashboard',[UserDashboard::class,'index'])->name('user-dashboard')->middleware('auth');
+
+
+// ======================== Admin Routes =============================
+
+Route::get('/login',[AuthController::class,'login'])->name('admin.login');
 Route::prefix('admin')->group( function (){
     Route::get('/login',[AuthController::class,'login']);
     Route::post('/login',[AuthController::class,'process_login'])->name('admin.login.process');
@@ -90,3 +101,9 @@ Route::prefix('admin')->group( function (){
     
     
 });
+
+
+
+
+Route::post('get-state-list',[LocationController::class,'get_state_list'])->name('get-state-list');
+Route::post('get-city-list',[LocationController::class,'get_city_list'])->name('get-city-list');

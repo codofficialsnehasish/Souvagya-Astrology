@@ -2,7 +2,7 @@
     @foreach ($errors->all() as $error)
     <script>
         $(document).ready(function(){
-            round_warning_noti('{{ $error }}');
+            round_error_noti('{{ $error }}');
         });
     </script>
     @endforeach
