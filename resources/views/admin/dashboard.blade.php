@@ -13,6 +13,47 @@
         </div>
         <!--end breadcrumb-->
 
+        @role('Astrologer')
+        <div class="row">
+            <div class="col-12 col-lg-3 col-xxl-2 d-flex">
+                <div class="card rounded-4 w-100">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 d-flex align-items-center justify-content-between">
+                                <div class="wh-42 d-flex align-items-center justify-content-center rounded-circle bg-info bg-opacity-10 text-info">
+                                    <span class="material-icons-outlined fs-5">event</span>
+                                </div>
+                                <div>
+                                <span class="text-danger d-flex align-items-center">-35%<i class="material-icons-outlined">expand_less</i></span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="mb-0">{{ $total_bookings }}</h4>
+                                <p class="mb-3">Total Bookings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 col-xxl-2 d-flex">
+                <div class="card rounded-4 w-100">
+                    <div class="card-body">
+                        <div class="mb-3 d-flex align-items-center justify-content-between">
+                            <div class="wh-42 d-flex align-items-center justify-content-center rounded-circle bg-info bg-opacity-10 text-info">
+                                <span class="material-icons-outlined fs-5">event</span>
+                            </div>
+                            <div><span class="text-danger d-flex align-items-center">-35%<i class="material-icons-outlined">expand_less</i></span></div>
+                        </div>
+                        <div>
+                            <h4 class="mb-0">{{ $today_appoinments }}</h4>
+                            <p class="mb-3">Today Appoinments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
+        @else
 
         <div class="row">
             <div class="col-12 col-lg-3 col-xxl-2 d-flex">
@@ -35,6 +76,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-lg-3 col-xxl-2 d-flex">
                 <div class="card rounded-4 w-100">
                     <div class="card-body">
@@ -54,6 +96,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-lg-3 col-xxl-2 d-flex">
                 <div class="card rounded-4 w-100">
                     <div class="card-body">
@@ -73,6 +116,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-lg-3 col-xxl-2 d-flex">
                 <div class="card rounded-4 w-100">
                     <div class="card-body">
@@ -93,6 +137,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-lg-3 col-xxl-2 d-flex">
                 <div class="card rounded-4 w-100">
                     <div class="card-body">
@@ -109,6 +154,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-lg-3 col-xxl-2 d-flex">
                 <div class="card rounded-4 w-100">
                     <div class="card-body">
@@ -126,6 +172,8 @@
                 </div>
             </div>
         </div><!--end row-->
+        @endrole
+        
 
         </div>
     </main>

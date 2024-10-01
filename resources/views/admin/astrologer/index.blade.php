@@ -34,9 +34,11 @@
                     <div class="col-auto flex-grow-1 overflow-auto">
                     </div>
                     <div class="col-auto">
+                        @can('Astrologer Create')
                         <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                             <a class="btn btn-primary px-4" href="{{ route('astrologer.create') }}"><i class="bi bi-plus-lg me-2"></i>Add New Astrologer</a>
                         </div>
+                        @endcan
                     </div>
                 </div><!--end row-->
 
@@ -55,7 +57,9 @@
                                             <th>Mobile</th>
                                             <th>Email</th>
                                             <th>Status</th>
+                                            @canany(['Astrologer Edit','Astrologer Delete'])
                                             <th>Action</th>
+                                            @endcanany
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,14 +73,20 @@
                                             <td>{{ $astrologer->phone }}</td>
                                             <td>{{ $astrologer->email }}</td>
                                             <td>{!! check_status($astrologer->status) !!}</td>
+                                            @canany(['Astrologer Edit','Astrologer Delete'])
                                             <td>
+                                                @can('Astrologer Edit')
                                                 <a class="btn btn-primary" href="{{ route('astrologer.edit',$astrologer->id) }}" alt="edit">Edit</a>
+                                                @endcan
+                                                @can('Astrologer Delete')
                                                 <form action="{{ route('astrologer.destroy', $astrologer->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Delete</button>
                                                 </form>
+                                                @endcan
                                             </td>
+                                            @endcanany
                                         </tr>
                                         @endforeach
                                     </tbody>

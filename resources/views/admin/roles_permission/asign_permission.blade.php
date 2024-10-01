@@ -47,12 +47,12 @@
                                 <input 
                                     class="form-check-input" 
                                     name="permission[]" 
-                                    id="" 
+                                    id="{{ $item->name}}" 
                                     type="checkbox" 
                                     value="{{ $item->name}}" 
                                     {{ in_array($item->id, $rolePermissions) ? 'checked': '' }}
                                 />
-                                <label class="form-check-label" for="">{{ $item->name }}</label>
+                                <label class="form-check-label" for="{{ $item->name}}">{{ $item->name }}</label>
                             </div>
                             @endforeach
                         </div>

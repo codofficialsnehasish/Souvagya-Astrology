@@ -15,6 +15,11 @@ class AstrologerController extends Controller
 {
     public function __construct(){
         $this->view_path = 'admin.astrologer.';
+
+        $this->middleware('role_or_permission:Astrologer Show', ['only' => ['index']]);
+        $this->middleware('role_or_permission:Astrologer Create', ['only' => ['create','store']]);
+        $this->middleware('role_or_permission:Astrologer Edit', ['only' => ['edit','update']]);
+        $this->middleware('role_or_permission:Astrologer Delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -100,7 +105,7 @@ class AstrologerController extends Controller
                 $astrologer->certificate = $filePath;
             }
 
-
+            $astrologer->syncRoles('Astrologer');
             $res = $astrologer->save();
             if($res){
                 return back()->with('success','Astrologer Added Successfully');
@@ -226,7 +231,7 @@ class AstrologerController extends Controller
                 $astrologer->certificate = $filePath;
             }
 
-
+            $astrologer->syncRoles('Astrologer');
             $res = $astrologer->update();
             if($res){
                 return back()->with('success','Astrologer Updated Successfully');

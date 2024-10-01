@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Booking;
 use App\Models\User;
 use App\Models\Prescription;
@@ -18,21 +20,41 @@ class BookingController extends Controller
 {
     public function __construct(){
         $this->view_path = 'admin.bookings.';
+
+        $this->middleware('role_or_permission:Booking Show', ['only' => ['index','today_bookings','today_appointments','show','process_prescription']]);
+        $this->middleware('role_or_permission:Booking Create', ['only' => ['create','store','process_prescription']]);
+        $this->middleware('role_or_permission:Booking Edit', ['only' => ['edit','update']]);
+        $this->middleware('role_or_permission:Booking Delete', ['only' => ['destroy','delete_prescription_note','delete_prescription_documents']]);
     }
 
     public function index()
     {
-        $bookings = Booking::all();
+        $user = Auth::user();
+        if ($user->hasRole('Astrologer')) {
+            $bookings = Booking::where('astrologer_id',$user->id)->get();
+        }else{
+            $bookings = Booking::all();
+        }
         return view($this->view_path.'index',compact('bookings'));
     }
 
     public function today_bookings(){
-        $bookings = Booking::whereDate('created_at',date('Y-m-d'))->get();
+        $user = Auth::user();
+        if ($user->hasRole('Astrologer')) {
+            $bookings = Booking::whereDate('created_at',date('Y-m-d'))->where('astrologer_id',$user->id)->get();
+        }else{
+            $bookings = Booking::whereDate('created_at',date('Y-m-d'))->get();
+        }
         return view($this->view_path.'today_bookings',compact('bookings'));
     }
 
     public function today_appointments(){
-        $bookings = Booking::whereDate('booking_date',date('Y-m-d'))->get();
+        $user = Auth::user();
+        if ($user->hasRole('Astrologer')) {
+            $bookings = Booking::whereDate('booking_date',date('Y-m-d'))->where('astrologer_id',$user->id)->get();
+        }else{
+            $bookings = Booking::whereDate('booking_date',date('Y-m-d'))->get();
+        }
         return view($this->view_path.'today_appointments',compact('bookings'));
     }
 

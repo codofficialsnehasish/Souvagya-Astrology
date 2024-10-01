@@ -34,9 +34,11 @@
                 <div class="col-auto flex-grow-1 overflow-auto">
                 </div>
                 <div class="col-auto">
+                    @can('Role Create')
                     <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                         <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-lg me-2"></i>Add New Role</button>
                     </div>
+                    @endcan
                 </div>
             </div><!--end row-->
 
@@ -51,8 +53,12 @@
                                             <input class="form-check-input" type="checkbox">
                                         </th>
                                         <th>Name</th>
+                                        @can('Asign Permission')
                                         <th>Asign Permission to Role</th>
+                                        @endcan
+                                        @canany(['Role Edit','Role Delete'])
                                         <th>Action</th>
+                                        @endcanany
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,17 +68,25 @@
                                             <input class="form-check-input" type="checkbox">
                                         </td>
                                         <td>{{ $role->name }}</td>
+                                        @can('Asign Permission')
                                         <td><a href="{{ route('role.addPermissionToRole', ['roleId' => $role->id]) }}" class="btn btn-outline-success">Asign Permission</a></td>
+                                        @endcan
+                                        @canany(['Role Edit','Role Delete'])
                                         <td class="d-flex">
+                                            @can('Role Edit')
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ $role->id }}" style="margin-right: 10px;"> 
                                                 Edit
                                             </button>
+                                            @endcan
+                                            @can('Role Delete')
                                             <form action="{{ route('role.destroy', ['roleId' => $role->id]) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
+                                            @endcan
                                         </td>
+                                        @endcanany
                                     </tr>
                                     @endforeach
                                 </tbody>

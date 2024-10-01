@@ -16,11 +16,11 @@ class RoleController extends Controller
     public function __construct(){
         $this->view_path = 'admin.roles_permission.';
 
-        // $this->middleware('role_or_permission:Role Show', ['only' => ['roles']]);
-        // $this->middleware('role_or_permission:Role Create', ['only' => ['create_role']]);
-        // $this->middleware('role_or_permission:Role Edit', ['only' => ['update_role']]);
-        // $this->middleware('role_or_permission:Role Delete', ['only' => ['destroy_role']]);
-        // $this->middleware('role_or_permission:Role Assign Permission', ['only' => ['addPermissionToRole','givePermissionToRole']]);
+        $this->middleware('role_or_permission:Role Show', ['only' => ['roles']]);
+        $this->middleware('role_or_permission:Role Create', ['only' => ['create_role']]);
+        $this->middleware('role_or_permission:Role Edit', ['only' => ['update_role']]);
+        $this->middleware('role_or_permission:Role Delete', ['only' => ['destroy_role']]);
+        $this->middleware('role_or_permission:Asign Permission', ['only' => ['addPermissionToRole','givePermissionToRole']]);
     }
 
     public function roles(){

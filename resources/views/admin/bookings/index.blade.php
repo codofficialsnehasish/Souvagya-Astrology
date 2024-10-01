@@ -34,9 +34,11 @@
                     <div class="col-auto flex-grow-1 overflow-auto">
                     </div>
                     <div class="col-auto">
+                        @can('Booking Create')
                         <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                             <a class="btn btn-primary px-4" href="{{ route('bookings.create') }}"><i class="bi bi-plus-lg me-2"></i>Add New Booking</a>
                         </div>
+                        @endcan
                     </div>
                 </div><!--end row-->
 
@@ -56,7 +58,9 @@
                                             <th>Email</th>
                                             <th>Address</th>
                                             <th>Astrloger</th>
+                                            @canany(['Booking Show','Booking Edit','Booking Delete'])
                                             <th>Action</th>
+                                            @endcanany
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,15 +76,23 @@
                                             <td class="text-wrap">{{ $booking->user->address }}</td>
                                             <td class="text-wrap">{{ $booking->astrologer->name }}</td>
                                             {{--<td>{!! check_status($booking->status) !!}</td>--}}
+                                            @canany(['Booking Show','Booking Edit','Booking Delete'])
                                             <td>
+                                                @can('Booking Show')
                                                 <a class="btn btn-info" href="{{ route('bookings.show',$booking->id) }}" alt="edit">Details</a>
+                                                @endcan
+                                                @can('Booking Edit')
                                                 <a class="btn btn-primary" href="{{ route('bookings.edit',$booking->id) }}" alt="edit">Edit</a>
+                                                @endcan
+                                                @can('Booking Delete')
                                                 <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Delete</button>
                                                 </form>
+                                                @endcan
                                             </td>
+                                            @endcanany
                                         </tr>
                                         @endforeach
                                     </tbody>

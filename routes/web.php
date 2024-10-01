@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\{
 
 Route::get('/',[AuthController::class,'login'])->name('admin.login');
 Route::prefix('admin')->group( function (){
-
+    Route::get('/login',[AuthController::class,'login']);
     Route::post('/login',[AuthController::class,'process_login'])->name('admin.login.process');
 
     Route::middleware('auth')->group( function (){

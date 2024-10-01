@@ -148,7 +148,7 @@
     <i class="material-icons-outlined">tune</i>Customize
 </button> -->
 
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="staticBackdrop">
+<!-- <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="staticBackdrop">
     <div class="offcanvas-header border-bottom h-70">
     <div class="">
         <h5 class="mb-0">Theme Customizer</h5>
@@ -206,9 +206,9 @@
             <span>Bordered</span>
             </label>
         </div>
-        </div><!--end row-->
+        </div>
 
     </div>
     </div>
-</div>
+</div> -->
 <!--start switcher-->

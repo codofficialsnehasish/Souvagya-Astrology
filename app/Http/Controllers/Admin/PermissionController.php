@@ -15,10 +15,10 @@ class PermissionController extends Controller
     public function __construct(){
         $this->view_path = 'admin.roles_permission.';
 
-        // $this->middleware('role_or_permission:Permission Show', ['only' => ['permission']]);
-        // $this->middleware('role_or_permission:Permission Create', ['only' => ['create_permission']]);
-        // $this->middleware('role_or_permission:Permission Edit', ['only' => ['update_permission']]);
-        // $this->middleware('role_or_permission:Permission Delete', ['only' => ['destroy_permission']]);
+        $this->middleware('role_or_permission:Permission Show', ['only' => ['permission']]);
+        $this->middleware('role_or_permission:Permission Create', ['only' => ['create_permission']]);
+        $this->middleware('role_or_permission:Permission Edit', ['only' => ['update_permission']]);
+        $this->middleware('role_or_permission:Permission Delete', ['only' => ['destroy_permission']]);
     }
 
     public function permission(){

@@ -34,9 +34,11 @@
                 <div class="col-auto flex-grow-1 overflow-auto">
                 </div>
                 <div class="col-auto">
+                    @can('Permission Create')
                     <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                         <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-lg me-2"></i>Add New Permission</button>
                     </div>
+                    @endcan
                 </div>
             </div><!--end row-->
 
@@ -51,7 +53,9 @@
                                             <input class="form-check-input" type="checkbox">
                                         </th>
                                         <th>Permission Name</th>
+                                        @canany(['Permission Edit','Permission Delete'])
                                         <th>Action</th>
+                                        @endcanany
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,16 +65,22 @@
                                             <input class="form-check-input" type="checkbox">
                                         </td>
                                         <td>{{ $permission->name }}</td>
+                                        @canany(['Permission Edit','Permission Delete'])
                                         <td class="d-flex">
+                                            @can('Permission Edit')
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ $permission->id }}" style="margin-right: 10px;"> 
                                                 Edit
                                             </button>
+                                            @endcan
+                                            @can('Permission Delete')
                                             <form action="{{ route('permission.destroy', ['permissionId' => $permission->id]) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
+                                            @endcan
                                         </td>
+                                        @endcanany
                                     </tr>
                                     @endforeach
                                 </tbody>

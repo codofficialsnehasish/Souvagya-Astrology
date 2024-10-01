@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Attendance Show', ['only' => ['index','todays_attendance']]);
+    }
+
     public function login_attendance()
     {
         if(!Attendance::where('user_id',Auth::id())->whereDate('login',date('Y-m-d'))->exists()){

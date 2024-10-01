@@ -14,6 +14,11 @@ class EmployeesController extends Controller
 {
     public function __construct(){
         $this->view_path = 'admin.employees.';
+
+        $this->middleware('role_or_permission:Employee Show', ['only' => ['index']]);
+        $this->middleware('role_or_permission:Employee Create', ['only' => ['add_new','process']]);
+        $this->middleware('role_or_permission:Employee Edit', ['only' => ['edit','update_process']]);
+        $this->middleware('role_or_permission:Employee Delete', ['only' => ['delete']]);
     }
 
     public function index(){

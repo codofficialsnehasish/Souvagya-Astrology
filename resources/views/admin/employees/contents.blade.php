@@ -34,9 +34,11 @@
                     <div class="col-auto flex-grow-1 overflow-auto">
                     </div>
                     <div class="col-auto">
+                        @can('Employee Create')
                         <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                             <a class="btn btn-primary px-4" href="{{ route('employee.add') }}"><i class="bi bi-plus-lg me-2"></i>Add New Employee</a>
                         </div>
+                        @endcan
                     </div>
                 </div><!--end row-->
 
@@ -56,7 +58,9 @@
                                             <th>Mobile</th>
                                             <th>Email</th>
                                             <th>Status</th>
+                                            @canany(['Employee Edit','Employee Delete'])
                                             <th>Action</th>
+                                            @endcanany
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -71,10 +75,16 @@
                                             <td>{{ $employee->phone }}</td>
                                             <td>{{ $employee->email }}</td>
                                             <td>{!! check_status($employee->status) !!}</td>
+                                            @canany(['Employee Edit','Employee Delete'])
                                             <td>
+                                                @can('Employee Edit')
                                                 <a class="btn btn-primary" href="{{ route('employee.edit',$employee->id) }}" alt="edit">Edit</a>
+                                                @endcan
+                                                @can('Employee Delete')
                                                 <a class="btn btn-danger" onclick="return confirm('Are You Sure?')" href="{{ route('employee.delete',$employee->id)}}">Delete</a>
+                                                @endcan
                                             </td>
+                                            @endcanany
                                         </tr>
                                         @endforeach
                                     </tbody>
