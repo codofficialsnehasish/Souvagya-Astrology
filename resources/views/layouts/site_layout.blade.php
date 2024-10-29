@@ -166,6 +166,7 @@
                         }
 
                         if(response.status == 1){
+                            window.location.href = "{{ route('user-dashboard') }}";
                             round_success_noti(response.massage);
                         }
 

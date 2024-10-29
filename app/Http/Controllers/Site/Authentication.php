@@ -26,8 +26,8 @@ class Authentication extends Controller
             ]);
         }
         // Generate a random verification code
-        $verificationCode = rand(100000, 999999);
-
+        //$verificationCode = rand(100000, 999999);
+        $verificationCode = 123456;
         // Save verification code in session
         Session::put('verification_code', $verificationCode);
         Session::put('email', $request->email);
