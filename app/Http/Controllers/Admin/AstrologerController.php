@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User; 
+use App\Models\AstrologerCertificate;
 use Illuminate\Http\Request;
 
 class AstrologerController extends Controller
@@ -103,11 +104,28 @@ class AstrologerController extends Controller
                 $directory = public_path('web-directory/astrologer/documents');
                 $img->move($directory, $filename);
                 $filePath = "web-directory/astrologer/documents/".$filename;
-                $astrologer->pan_card = $filePath;
+                $astrologer->pan_card_proof = $filePath;
             }
 
             $astrologer->syncRoles('Astrologer');
             $res = $astrologer->save();
+
+            foreach($request->certificate_name as $key => $value){
+                $astrologer_certificate = new AstrologerCertificate();
+                $astrologer_certificate->astrologer_id = $astrologer->id;
+                $astrologer_certificate->certificate_name = $request->certificate_name[$key];
+                $astrologer_certificate->certified_date = $request->certificate_date[$key];
+                if (isset($request->certificate_image[$key]) && $request->hasFile("certificate_image.$key")) {
+                    $img = $request->file("certificate_image.$key");
+                    $filename = time() . '_' . $img->getClientOriginalName();
+                    $directory = public_path('web-directory/astrologer/documents');
+                    $img->move($directory, $filename);
+                    
+                    $filePath = "web-directory/astrologer/documents/" . $filename;
+                    $astrologer_certificate->certificate_image = $filePath;
+                }
+                $astrologer_certificate->save();
+            }
             if($res){
                 return back()->with('success','Astrologer Added Successfully');
             }else{
@@ -130,7 +148,8 @@ class AstrologerController extends Controller
     public function edit(string $id)
     {
         $astrologer = User::find($id);
-        return view($this->view_path.'edit',compact('astrologer'));
+        $certificates = AstrologerCertificate::where('astrologer_id',$astrologer->id)->get();
+        return view($this->view_path.'edit',compact('astrologer','certificates'));
     }
 
     /**
@@ -217,23 +236,40 @@ class AstrologerController extends Controller
                 $astrologer->aadhaar_back_side = $filePath;
             }
 
-            if ($request->hasFile('certificate')) {
-                if ($astrologer->certificate) {
-                    $existingImagePath = public_path($astrologer->certificate);
+            if ($request->hasFile('pan_card')) {
+                if ($astrologer->pan_card_proof) {
+                    $existingImagePath = public_path($astrologer->pan_card_proof);
                     if (file_exists($existingImagePath)) {
                         unlink($existingImagePath);
                     }
                 }
-                $img = $request->file('certificate');
+                $img = $request->file('pan_card');
                 $filename = time(). '_' .$img->getClientOriginalName();
                 $directory = public_path('web-directory/astrologer/documents');
                 $img->move($directory, $filename);
                 $filePath = "web-directory/astrologer/documents/".$filename;
-                $astrologer->certificate = $filePath;
+                $astrologer->pan_card_proof = $filePath;
             }
 
             $astrologer->syncRoles('Astrologer');
             $res = $astrologer->update();
+
+            foreach($request->certificate_name as $key => $value){
+                $astrologer_certificate = new AstrologerCertificate();
+                $astrologer_certificate->astrologer_id = $astrologer->id;
+                $astrologer_certificate->certificate_name = $request->certificate_name[$key];
+                $astrologer_certificate->certified_date = $request->certificate_date[$key];
+                if (isset($request->certificate_image[$key]) && $request->hasFile("certificate_image.$key")) {
+                    $img = $request->file("certificate_image.$key");
+                    $filename = time() . '_' . $img->getClientOriginalName();
+                    $directory = public_path('web-directory/astrologer/documents');
+                    $img->move($directory, $filename);
+                    
+                    $filePath = "web-directory/astrologer/documents/" . $filename;
+                    $astrologer_certificate->certificate_image = $filePath;
+                }
+                $astrologer_certificate->save();
+            }
             if($res){
                 return back()->with('success','Astrologer Updated Successfully');
             }else{
@@ -267,8 +303,8 @@ class AstrologerController extends Controller
                     unlink($existingImagePath);
                 }
             }
-            if ($astrologer->certificate) {
-                $existingImagePath = public_path($astrologer->certificate);
+            if ($astrologer->pan_card_proof) {
+                $existingImagePath = public_path($astrologer->pan_card_proof);
                 if (file_exists($existingImagePath)) {
                     unlink($existingImagePath);
                 }
@@ -281,6 +317,26 @@ class AstrologerController extends Controller
             }
         }else{
             return back()->with(['error'=>'Astrologer Not Found']);
+        }
+    }
+
+    public function delete_certificate_image(string $id){
+        $AstrologerCertificate = AstrologerCertificate::find($id);
+        if($AstrologerCertificate){
+            if ($AstrologerCertificate->certificate_image) {
+                $existingImagePath = public_path($AstrologerCertificate->certificate_image);
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
+            }
+            $res = $AstrologerCertificate->delete();
+            if($res){
+                return back()->with(['success'=>'Deleted Successfully']);
+            }else{
+                return back()->with(['error'=>'Not Deleted']);
+            }
+        }else{
+            return back()->with(['error'=>'Not Found']);
         }
     }
 }

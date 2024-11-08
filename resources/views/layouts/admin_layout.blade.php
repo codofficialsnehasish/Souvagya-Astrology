@@ -18,6 +18,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_asset/assets/plugins/metismenu/metisMenu.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_asset/assets/plugins/metismenu/mm-vertical.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+
+    <!-- select 2 js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_asset/assets/plugins/simplebar/css/simplebar.css') }}">
 
     <link rel="stylesheet" href="{{ asset('dashboard_asset/assets/plugins/notifications/css/lobibox.min.css') }}">
@@ -76,6 +81,10 @@
 	<script src="{{ asset('dashboard_asset/assets/plugins/notifications/js/notifications.min.js') }}"></script>
 	<script src="{{ asset('dashboard_asset/assets/plugins/notifications/js/notification-custom-script.js') }}"></script>
     
+    <!-- select 2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="{{ asset('dashboard_asset/assets/plugins/select2/js/select2-custom.js') }}"></script>
+
     @include('admin.include.notification')
 
     <script>

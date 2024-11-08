@@ -16,6 +16,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/css/fonts.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('dashboard_asset/assets/plugins/notifications/css/lobibox.min.css') }}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+
     @yield('style')
 </head>
 <body>
@@ -109,6 +112,8 @@
     <script src="{{ asset('site_asset/js/plugin/airdatepicker/i18n/datepicker.en.js') }}"></script>
     <script src="{{ asset('site_asset/js/custom.js') }}"></script>  
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
     <script src="{{ asset('dashboard_asset/assets/plugins/notifications/js/lobibox.min.js') }}"></script>
 	<script src="{{ asset('dashboard_asset/assets/plugins/notifications/js/notifications.min.js') }}"></script>
 	<script src="{{ asset('dashboard_asset/assets/plugins/notifications/js/notification-custom-script.js') }}"></script>
@@ -227,6 +232,43 @@
                 }
             });
         });
+    </script>
+
+    <script>
+            
+        $(".datepicker").flatpickr();
+
+        $(".time-picker").flatpickr({
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "Y-m-d H:i",
+            });
+
+        $(".date-time").flatpickr({
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+        });
+
+        $(".date-format").flatpickr({
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+
+        $(".date-range").flatpickr({
+            mode: "range",
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+
+        $(".date-inline").flatpickr({
+            inline: true,
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+
     </script>
 
     @yield('script')

@@ -24,6 +24,9 @@ use App\Http\Controllers\Site\{
 // ========================= Site Routes ==========================
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+Route::post('/astrologer-booking', [HomeController::class, 'astrologer_booking'])->name('astrologer-booking');
+
 Route::post('/send-verification-code', [Authentication::class, 'sendVerificationCode'])->name('send-verification-code');
 Route::post('/verify-code', [Authentication::class, 'verifyCode'])->name('verify-code');
 Route::post('/process-submit-details',[Authentication::class,'process_submit_details'])->name('process-submit-details')->middleware('auth');
@@ -83,14 +86,16 @@ Route::prefix('admin')->group( function (){
         });
 
         Route::resource('astrologer',AstrologerController::class);
+        Route::get('astrologers/{id}/delete-certificate-image',[AstrologerController::class,'delete_certificate_image'])->name('astrologers.delete-certificate-image');
 
         Route::resource('bookings',BookingController::class);
+
         Route::get('booking/today-bookings',[BookingController::class,'today_bookings'])->name('booking.today-bookings');
         Route::get('booking/today-appointments',[BookingController::class,'today_appointments'])->name('booking.today-appointments');
         Route::post('booking/process-prescription',[BookingController::class,'process_prescription'])->name('booking.process-prescription');
         Route::get('booking/{id}/delete-prescription-documents',[BookingController::class,'delete_prescription_documents'])->name('booking.delete-prescription-documents');
         Route::get('booking/{id}/delete-prescription-note',[BookingController::class,'delete_prescription_note'])->name('booking.delete-prescription-note');
-
+        
         Route::controller(AttendanceController::class)->group(function () {
             Route::prefix('attendance')->group(function () {
                 Route::get('/','index')->name('attendance');
@@ -98,6 +103,7 @@ Route::prefix('admin')->group( function (){
             });
         });
     });
+    Route::post('booking/check-astrologer-availability',[BookingController::class,'check_astrologer_availability'])->name('booking.check-astrologer-availability');
     
     
 });

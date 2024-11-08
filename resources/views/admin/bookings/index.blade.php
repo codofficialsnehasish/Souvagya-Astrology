@@ -53,6 +53,7 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </th>
                                             <th class="text-wrap">Booking Date</th>
+                                            <th class="text-wrap">Booking Slot</th>
                                             <th>Client Name</th>
                                             <th>Mobile No.</th>
                                             <th>Email</th>
@@ -70,6 +71,7 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </td>
                                             <td class="text-wrap">{!! formated_date($booking->booking_date) !!}</td>
+                                            <td class="text-wrap">{{ format_time($booking->start_time) }} - {{ format_time($booking->end_time) }}</td>
                                             <td class="text-wrap">{{ $booking->user->name }}</td>
                                             <td class="text-wrap">{{ $booking->user->phone }}</td>
                                             <td class="text-wrap">{{ $booking->user->email }}</td>

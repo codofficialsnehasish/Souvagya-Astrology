@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -61,69 +61,151 @@ class BookingController extends Controller
     public function create()
     {
         $astrologers = User::where('role','astrologer')->where('status',1)->get();
-        return view($this->view_path.'create',compact('astrologers'));
+        $clients = User::where('role','user')->where('status',1)->get();
+        return view($this->view_path.'create',compact('astrologers','clients'));
+    }
+
+    public function check_astrologer_availability(Request $request){
+        $carbonDateTime = Carbon::parse($request->booking_date);
+        $date = $carbonDateTime->toDateString();
+        $start_time = $carbonDateTime->toTimeString();
+        $end_time = $request->end_time;
+
+        $overlap = Booking::where('booking_date', $date)
+                ->where('astrologer_id', $request->astrologer)
+                ->where(function ($query) use ($start_time, $end_time) {
+                    $query->whereBetween('start_time', [$start_time, $end_time])
+                          ->orWhereBetween('end_time', [$start_time, $end_time])
+                          ->orWhere(function ($query) use ($start_time, $end_time) {
+                              $query->where('start_time', '<', $start_time)
+                                    ->where('end_time', '>', $end_time);
+                          });
+                })
+                ->exists();
+
+        if ($overlap) {
+            return response()->json([
+                'message' => 'This time slot is already booked.',
+                'status' => 'error'
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'This time slot is available.',
+                'status' => 'success'
+            ]);
+        }
+
     }
 
     public function store(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
-            'name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
-            'email' => 'required|email',
-            'mobile' => 'required|digits:10|regex:/^[6789]/',
+            'name' => 'nullable|regex:/^[a-zA-Z\s]+$/|max:255',
+            'email' => 'nullable|email',
+            'mobile' => 'nullable|digits:10|regex:/^[6789]/',
             'booking_date' => 'required|date|after:today',
+            'end_time' => 'required',
             'astrologer' => 'required|numeric|exists:users,id,role,astrologer',
-            'address' => 'required|max:255',
+            'address' => 'nullable|max:255',
+            'client_id' => 'nullable|numeric|exists:users,id,role,user'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }else{
             try {
-                $user = User::where('phone',$request->mobile)->where('email',$request->email)->first();
-                if($user){
-                    $booking = new Booking();
-                    $booking->booking_date = $request->booking_date;
-                    $booking->user_id = $user->id;
-                    $booking->astrologer_id = $request->astrologer;
-                    $res = $booking->save();
-                    if($res){
-                        return back()->with('success','Booking Created Successfully');
-                    }else{
-                        return back()->with('success','Booking Not Created');
+                $carbonDateTime = Carbon::parse($request->booking_date);
+                $date = $carbonDateTime->toDateString();
+                $start_time = $carbonDateTime->toTimeString();
+                $end_time = $request->end_time;
+
+                // check booking avaliable or not
+                $overlap = Booking::where('booking_date', $date)
+                ->where('astrologer_id', $request->astrologer)
+                ->where(function ($query) use ($start_time, $end_time) {
+                    $query->whereBetween('start_time', [$start_time, $end_time])
+                          ->orWhereBetween('end_time', [$start_time, $end_time])
+                          ->orWhere(function ($query) use ($start_time, $end_time) {
+                              $query->where('start_time', '<', $start_time)
+                                    ->where('end_time', '>', $end_time);
+                          });
+                })
+                ->exists();
+
+                if ($overlap) {
+                    return back()->withErrors(['error' => 'This time slot is already booked.']);
+                }
+
+                if(isset($request->client_id)){
+                    $user = User::find($request->client_id);
+                    if($user){
+                        $booking = new Booking();
+                        $booking->booking_date = $date;
+                        $booking->start_time = $start_time;
+                        $booking->end_time = $end_time;
+                        $booking->user_id = $user->id;
+                        $booking->astrologer_id = $request->astrologer;
+                        $res = $booking->save();
+                        // return $user;die;
+                        if($res){
+                            return back()->with('success','Booking Created Successfully');
+                        }else{
+                            return back()->with('error','Booking Not Created');
+                        }
                     }
                 }else{
-                    if(User::where('phone',$request->mobile)->exists() && !User::where('email',$request->email)->exists()){
-                        return back()->with('error','This Mobile Number Already Exists');
-                    }
-                    if(!User::where('phone',$request->mobile)->exists() && User::where('email',$request->email)->exists()){
-                        return back()->with('error','This Email Already Exists');
-                    }
-
-                    $newuser = new User();
-                    $newuser->name = $request->name;
-                    $newuser->role = 'user';
-                    $newuser->status = 1; 
-                    $newuser->phone = $request->mobile;
-                    $newuser->email = $request->email;
-                    $newuser->address = $request->address;
-                    $result = $newuser->save();
-
-                    $booking = new Booking();
-                    $booking->booking_date = $request->booking_date;
-                    $booking->user_id = $newuser->id; 
-                    $booking->astrologer_id = $request->astrologer;
-                    $res = $booking->save();
-
-                    if($result && $res){
-                        return back()->with('success','Client Registred & Booking Created Successfully');
+                    $user = User::where('phone',$request->mobile)->where('email',$request->email)->first();
+                    
+                    if($user){
+    
+                        $booking = new Booking();
+                        $booking->booking_date = $date;
+                        $booking->start_time = $start_time;
+                        $booking->end_time = $end_time;
+                        $booking->user_id = $user->id;
+                        $booking->astrologer_id = $request->astrologer;
+                        $res = $booking->save();
+                        // return $user;die;
+                        if($res){
+                            return back()->with('success','Booking Created Successfully');
+                        }else{
+                            return back()->with('error','Booking Not Created');
+                        }
                     }else{
-                        return back()->with('success','An error occurred');
+                        if(User::where('phone',$request->mobile)->exists() && !User::where('email',$request->email)->exists()){
+                            return back()->with('error','This Mobile Number Already Exists');
+                        }
+                        if(!User::where('phone',$request->mobile)->exists() && User::where('email',$request->email)->exists()){
+                            return back()->with('error','This Email Already Exists');
+                        }
+    
+                        $newuser = new User();
+                        $newuser->name = $request->name;
+                        $newuser->role = 'user';
+                        $newuser->status = 1; 
+                        $newuser->phone = $request->mobile;
+                        $newuser->email = $request->email;
+                        $newuser->address = $request->address;
+                        $result = $newuser->save();
+    
+                        $booking = new Booking();
+                        $booking->booking_date = $request->booking_date;
+                        $booking->user_id = $newuser->id; 
+                        $booking->astrologer_id = $request->astrologer;
+                        $res = $booking->save();
+    
+                        if($result && $res){
+                            return back()->with('success','Client Registred & Booking Created Successfully');
+                        }else{
+                            return back()->with('error','An error occurred');
+                        }
                     }
+                    return response()->json(['success' => true, 'message' => 'Booking created successfully']);
                 }
-                return response()->json(['success' => true, 'message' => 'Booking created successfully']);
 
             } catch (\Exception $e) {
                 // Handle the exception
-                return back()->with('message','An error occurred: ' . $e->getMessage());
+                return back()->with('error','An error occurred: ' . $e->getMessage());
             }
         }
     }
@@ -211,69 +293,114 @@ class BookingController extends Controller
     {
         $astrologers = User::where('role','astrologer')->where('status',1)->get();
         $booking = Booking::find($id);
-        return view($this->view_path.'edit',compact('astrologers','booking'));
+        $clients = User::where('role','user')->where('status',1)->get();
+        return view($this->view_path.'edit',compact('astrologers','booking','clients'));
     }
 
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
-            'email' => 'required|email',
-            'mobile' => 'required|digits:10|regex:/^[6789]/',
+            'name' => 'nullable|regex:/^[a-zA-Z\s]+$/|max:255',
+            'email' => 'nullable|email',
+            'mobile' => 'nullable|digits:10|regex:/^[6789]/',
             'booking_date' => 'required|date|after:today',
+            'end_time' => 'required',
             'astrologer' => 'required|numeric|exists:users,id,role,astrologer',
-            'address' => 'required|max:255',
+            'address' => 'nullable|max:255',
+            'client_id' => 'required|numeric|exists:users,id,role,user'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }else{
             try {
-                $user = User::where('phone',$request->mobile)->where('email',$request->email)->first();
-                if($user){
-                    $booking = Booking::find($id);
-                    $booking->booking_date = $request->booking_date;
-                    $booking->user_id = $user->id;
-                    $booking->astrologer_id = $request->astrologer;
-                    $res = $booking->update();
-                    if($res){
-                        return back()->with('success','Booking Updated Successfully');
-                    }else{
-                        return back()->with('success','Booking Not Updated');
-                    }
-                }else{
-                    if(User::where('phone',$request->mobile)->exists() && !User::where('email',$request->email)->exists()){
-                        return back()->with('error','This Mobile Number Already Exists');
-                    }
-                    if(!User::where('phone',$request->mobile)->exists() && User::where('email',$request->email)->exists()){
-                        return back()->with('error','This Email Already Exists');
-                    }
+                $carbonDateTime = Carbon::parse($request->booking_date);
+                $date = $carbonDateTime->toDateString();
+                $start_time = $carbonDateTime->toTimeString();
+                $end_time = $request->end_time;
 
-                    $newuser = new User();
-                    $newuser->name = $request->name;
-                    $newuser->role = 'user';
-                    $newuser->status = 1; 
-                    $newuser->phone = $request->mobile;
-                    $newuser->email = $request->email;
-                    $newuser->address = $request->address;
-                    $result = $newuser->save();
+                // check booking avaliable or not
+                $overlap = Booking::where('booking_date', $date)
+                ->where('astrologer_id', $request->astrologer)
+                ->where('id', '!=', $id)
+                ->where(function ($query) use ($start_time, $end_time) {
+                    $query->whereBetween('start_time', [$start_time, $end_time])
+                          ->orWhereBetween('end_time', [$start_time, $end_time])
+                          ->orWhere(function ($query) use ($start_time, $end_time) {
+                              $query->where('start_time', '<', $start_time)
+                                    ->where('end_time', '>', $end_time);
+                          });
+                })
+                ->exists();
 
-                    $booking = Booking::find($id);
-                    $booking->booking_date = $request->booking_date;
-                    $booking->user_id = $newuser->id; 
-                    $booking->astrologer_id = $request->astrologer;
-                    $res = $booking->update();
+                if ($overlap) {
+                    return back()->withErrors(['error' => 'This time slot is already booked.']);
+                }
 
-                    if($result && $res){
-                        return back()->with('success','Client Registred & Booking Updated Successfully');
-                    }else{
-                        return back()->with('success','An error occurred');
+                if(isset($request->client_id)){
+                    $user = User::find($request->client_id);
+                    if($user){
+                        $booking = Booking::find($id);
+                        $booking->booking_date = $date;
+                        $booking->start_time = $start_time;
+                        $booking->end_time = $end_time;
+                        $booking->user_id = $user->id;
+                        $booking->astrologer_id = $request->astrologer;
+                        $res = $booking->update();
+                        // return $user;die;
+                        // if($res){
+                        //     return back()->with('success','Booking Created Successfully');
+                        // }else{
+                        //     return back()->with('error','Booking Not Created');
+                        // }
                     }
                 }
-                return response()->json(['success' => true, 'message' => 'Booking created successfully']);
+                // $user = User::where('phone',$request->mobile)->where('email',$request->email)->first();
+                // if($user){
+                //     $booking = Booking::find($id);
+                //     $booking->booking_date = $request->booking_date;
+                //     $booking->user_id = $user->id;
+                //     $booking->astrologer_id = $request->astrologer;
+                //     $res = $booking->update();
+                //     if($res){
+                //         return back()->with('success','Booking Updated Successfully');
+                //     }else{
+                //         return back()->with('success','Booking Not Updated');
+                //     }
+                // }else{
+                //     if(User::where('phone',$request->mobile)->exists() && !User::where('email',$request->email)->exists()){
+                //         return back()->with('error','This Mobile Number Already Exists');
+                //     }
+                //     if(!User::where('phone',$request->mobile)->exists() && User::where('email',$request->email)->exists()){
+                //         return back()->with('error','This Email Already Exists');
+                //     }
+
+                //     $newuser = new User();
+                //     $newuser->name = $request->name;
+                //     $newuser->role = 'user';
+                //     $newuser->status = 1; 
+                //     $newuser->phone = $request->mobile;
+                //     $newuser->email = $request->email;
+                //     $newuser->address = $request->address;
+                //     $result = $newuser->save();
+
+                //     $booking = Booking::find($id);
+                //     $booking->booking_date = $request->booking_date;
+                //     $booking->user_id = $newuser->id; 
+                //     $booking->astrologer_id = $request->astrologer;
+                //     $res = $booking->update();
+
+                //     if($result && $res){
+                //         return back()->with('success','Client Registred & Booking Updated Successfully');
+                //     }else{
+                //         return back()->with('success','An error occurred');
+                //     }
+                // }
+                return redirect()->back()->with('success','Booking Updated successfully');
+                // return response()->json(['success' => true, 'message' => 'Booking Updated successfully']);
 
             } catch (\Exception $e) {
                 // Handle the exception
-                return back()->with('message','An error occurred: ' . $e->getMessage());
+                return back()->with('error','An error occurred: ' . $e->getMessage());
             }
         }
     }

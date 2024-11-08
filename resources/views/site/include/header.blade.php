@@ -38,10 +38,12 @@
                         <span class="as_logintext">Dashboard</span>
                     </div>
                 </a>
-                <a href="{{ route('user-logout') }}" class="pl-5 pr-5">
-                    <div class="as_infobox">
+                <a href="{{ route('user-logout') }}" class="as_btn" style="margin-left: 56px;">
+                    {{-- <div class="as_infobox">
                         <span class="as_logintext">Logout</span>
-                    </div>
+                    </div> --}}
+                    Logout
+
                 </a>
                 @else
                 <a href="javascript:void(0);">
