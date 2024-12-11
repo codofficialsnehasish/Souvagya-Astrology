@@ -63,12 +63,13 @@
             </span>
             <div class="as_menu">
                 <ul>
-                    <li><a href="{{ route('home') }}" class="active">home</a></li>
-                    <li><a href="javascript:void(0)">about</a></li>
-                    <li><a href="javascript:void(0)">services</a></li>
-                    <li><a href="javascript:void(0)">Our astrologers</a></li>
-                    <li><a href="javascript:void(0)">appointment</a></li>
-                    <li><a href="javascript:void(0)">contact</a></li>
+                    <li><a class="@if(request()->segment(1) == '') active @else '' @endif" href="{{ route('home') }}" class="active">home</a></li>
+                    <li><a class="@if(request()->segment(1) == 'about') active @else '' @endif" href="{{ route('about') }}">about</a></li>
+                    <li><a class="@if(request()->segment(1) == 'services') active @else '' @endif" href="{{ route('services') }}">services</a></li>
+                    <li><a class="@if(request()->segment(1) == 'astrologers') active @else '' @endif" href="{{ route('astrologers') }}">Our astrologers</a></li>
+                    <li><a class="@if(request()->segment(1) == 'shops') active @else '' @endif" href="{{ route('shops') }}">shop</a></li>
+                    <li><a class="@if(request()->segment(1) == 'home') active @else '' @endif" href="javascript:void(0)">magazine</a></li>
+                    <li><a class="@if(request()->segment(1) == 'contact-us') active @else '' @endif" href="{{ route('contact-us') }}">contact</a></li>
                 </ul>
             </div>
             <div class="as_search_wrapper">

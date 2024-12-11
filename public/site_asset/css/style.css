@@ -761,7 +761,7 @@ span.select2-dropdown.select2-dropdown--above, .select2-container--open .select2
 /* banner css end */
 /* about css start */
 .as_about_wrapper{
-    background-image: url('https://dummyimage.com/1920x705');
+    /* background-image: url('https://dummyimage.com/1920x705'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center;
@@ -1090,7 +1090,7 @@ li.as_form_box {
 /* zodiec sign form css end */
 /* customer css start */
 .as_customer_wrapper{
-    background-image: url('https://dummyimage.com/1920x654');
+    /* background-image: url('https://dummyimage.com/1920x654'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center;
@@ -1460,7 +1460,7 @@ section.as_whychoose_wrapper.as_padderTop80 {
 /* footer css end */
 /* breadcrum start */
 .as_breadcrum_wrapper{
-    background-image: url('https://dummyimage.com/1920x140');
+    /* background-image: url('https://dummyimage.com/1920x140'); */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -2093,7 +2093,7 @@ section.as_whychoose_wrapper.as_padderTop80 {
 /* Login popup End */
 /* Appointment Page Start */
 .as_appointment_wrapper,.as_product_single_wrapper,.as_team_wrapper,.as_privacy_wrapper,.as_faq_wrapper,.as_contact_section {
-    background-image: url(https://dummyimage.com/1920x654);
+    /* background-image: url(https://dummyimage.com/1920x654); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

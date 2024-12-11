@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\{
     AstrologerController,
     BookingController,
     AttendanceController,
+    EnquiryController,
 };
 
 use App\Http\Controllers\LocationController;
@@ -19,11 +20,24 @@ use App\Http\Controllers\Site\{
     HomeController,
     Authentication,
     UserDashboard,
+    AboutController,
+    ContactController,
+    AstrologersController,
+    ServicesController,
+    ShopsController,
 };
 
 // ========================= Site Routes ==========================
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/about',[AboutController::class,'index'])->name('about');
+Route::get('/astrologers',[AstrologersController::class,'index'])->name('astrologers');
+Route::get('/services',[ServicesController::class,'index'])->name('services');
+Route::get('/shops',[ShopsController::class,'index'])->name('shops');
+
+Route::get('/contact-us',[ContactController::class,'index'])->name('contact-us');
+Route::post('/contact-us-enquiry',[ContactController::class,'store'])->name('contact-us-enquiry');
+
 
 Route::post('/astrologer-booking', [HomeController::class, 'astrologer_booking'])->name('astrologer-booking');
 
@@ -102,6 +116,9 @@ Route::prefix('admin')->group( function (){
                 Route::get('/todays-attendance','todays_attendance')->name('attendance.todays-attendance');
             });
         });
+
+        Route::resource('enquiry',EnquiryController::class);
+        Route::get('enquirys/todays-enquiry',[EnquiryController::class,'todays_enquiry'])->name('enquirys.todays-enquiry');
     });
     Route::post('booking/check-astrologer-availability',[BookingController::class,'check_astrologer_availability'])->name('booking.check-astrologer-availability');
     

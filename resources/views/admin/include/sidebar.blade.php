@@ -160,6 +160,27 @@
                 </ul>
             </li>
             @endcan
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon">
+                        <i class="material-icons-outlined">event</i>
+                    </div>
+                    <div class="menu-title">Enquiry</div>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('enquirys.todays-enquiry') }}">
+                            <i class="material-icons-outlined">arrow_right</i>Todays Enquiry
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('enquiry.index') }}">
+                            <i class="material-icons-outlined">arrow_right</i>All Enquiry
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!--end navigation-->
     </div>

@@ -27,10 +27,10 @@
                     <div class="as_share_box">
                         <p>Follow Us</p>
                         <ul>
-                            <li><a href="javascript:;"><img src="assets/images/svg/facebook.svg" alt=""></a></li>
-                            <li><a href="javascript:;"><img src="assets/images/svg/twitter.svg" alt=""></a></li>
-                            <li><a href="javascript:;"><img src="assets/images/svg/google.svg" alt=""></a></li>
-                            <li><a href="javascript:;"><img src="assets/images/svg/youtube.svg" alt=""></a></li>
+                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/facebook.svg') }}" alt=""></a></li>
+                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/twitter.svg') }}" alt=""></a></li>
+                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/google.svg') }}" alt=""></a></li>
+                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/youtube.svg') }}" alt=""></a></li>
                         </ul>
                     </div>
                 </div>

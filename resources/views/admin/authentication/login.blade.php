@@ -44,7 +44,7 @@
                                     @csrf
                                     <div class="col-12">
                                         <label for="inputEmailAddress" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="inputEmailAddress" name="email" placeholder="jhon@example.com">
+                                        <input type="email" class="form-control" id="inputEmailAddress" name="email" placeholder="jhon@example.com" autofocus>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputChoosePassword" class="form-label">Password</label>

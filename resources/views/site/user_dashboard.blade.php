@@ -24,6 +24,13 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="pill" href="#primary-pills-enquiry" role="tab" aria-selected="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">Enquiry&nbsp;({{ count($enquirys) }})</div>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
@@ -190,6 +197,31 @@
                                                 <hr class="border-dotted">
                                                 @endforeach
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="primary-pills-enquiry" role="tabpanel">
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                @foreach($enquirys as $enquiry)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Enquiry Date : {!! formated_date($enquiry->created_at) !!} , Subject : {{ $enquiry->subject }}, Status : {{ $enquiry->status }}
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body" style="color: #5b6166;">
+                                            Enquiry Date : {!! formated_date($enquiry->created_at) !!}<br>
+                                            Subject : {{ $enquiry->subject }}<br>
+                                            Message : {{ $enquiry->message }}<br><hr><br>
+
+                                            Admin Reply : {{ $enquiry->admin_reply }}
+                                            @if($enquiry->admin_reply)
+                                            Replied at : {!! formated_date($enquiry->updated_at) !!}
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -85,6 +85,12 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	<script src="{{ asset('dashboard_asset/assets/plugins/select2/js/select2-custom.js') }}"></script>
 
+    <!--tinymce js-->
+    <script src="{{ asset('dashboard_asset/assets/js/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- init js -->
+    <script src="{{ asset('dashboard_asset/assets/js/form-editor.init.js') }}"></script>
+
     @include('admin.include.notification')
 
     <script>
