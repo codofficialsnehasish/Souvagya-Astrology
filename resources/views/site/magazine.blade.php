@@ -28,7 +28,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
                             <div class="as_blog_box">
                                 <div class="as_blog_img">
-                                    <a href="blog_detail.html"><img src="{{ $magazine->getFirstMediaUrl('magazine-image') }}" alt="" class="img-responsive"></a>
+                                    <a href="{{ $magazine->getFirstMediaUrl('magazine-pdf') }}" target="_blank"><img src="{{ $magazine->getFirstMediaUrl('magazine-image') }}" alt="" class="img-responsive"></a>
                                     <span class="as_btn">{!! format_date($magazine->created_at) !!}</span>
                                 </div>
                                 <h4 class="as_subheading"><a href="{{ $magazine->getFirstMediaUrl('magazine-pdf') }}" target="_blank">{{ $magazine->name }}</a></h4>
