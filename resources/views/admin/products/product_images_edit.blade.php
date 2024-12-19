@@ -63,12 +63,12 @@
                                                             <li class="media" id="uploaderFile<?php echo $image->getCustomProperty('file_id'); ?>">
                                                                 <img src="{{ $image->getUrl() }}" alt="">
                                                                 <a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img text-center" data-file-id="{{ $image->getCustomProperty('file_id') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item">
-                                                                    <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
+                                                                    <i class="text-danger" data-feather="trash-2"></i>
                                                                 </a>
                                                                 @if ($image->getCustomProperty('is_main'))
-                                                                    <a href="javascript:void(0)" class="float-start btn btn-subtle-success mt-1 btn-sm waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;">Main</a>
+                                                                    <a href="javascript:void(0)" class="float-start btn btn-success mt-1 btn-sm waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;">Main</a>
                                                                 @else
-                                                                    <a href="javascript:void(0)" class="float-start btn btn-subtle-secondary btn-sm mt-1 waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;" data-file-id="{{ $image->getCustomProperty('file_id') }}">Main</a>
+                                                                    <a href="javascript:void(0)" class="float-start btn btn-secondary btn-sm mt-1 waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;" data-file-id="{{ $image->getCustomProperty('file_id') }}">Main</a>
                                                                 @endif
                                                             </li>
                                                         <?php endforeach;

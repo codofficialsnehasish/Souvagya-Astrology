@@ -194,9 +194,9 @@ class ProductController extends Controller
     
             // Check if this is the main image
             if ($media->getCustomProperty('is_main', false)) {
-                $html .= '<a href="javascript:void(0)" class="float-start btn btn-subtle-success btn-sm waves-effect btn-set-image-main" style="padding: 0 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
+                $html .= '<a href="javascript:void(0)" class="float-start btn btn-success btn-sm waves-effect btn-set-image-main" style="padding: 0 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
             } else {
-                $html .= '<a href="javascript:void(0)" class="float-start btn btn-subtle-secondary btn-sm waves-effect btn-set-image-main" style="padding: 0 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
+                $html .= '<a href="javascript:void(0)" class="float-start btn btn-secondary btn-sm waves-effect btn-set-image-main" style="padding: 0 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
             }
     
             return response()->json(['html' => $html]);
@@ -245,9 +245,9 @@ class ProductController extends Controller
                         <img src="' . $media->getUrl() . '" alt="">' .
                         '<a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img" data-file-id="' . $media->getCustomProperty('file_id') . '" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item"><i class="far fa-trash-alt"></i></a>';
             if ($media->getCustomProperty('is_main')) {
-                $html .= '<a href="javascript:void(0)" class="float-start btn btn-subtle-success btn-sm waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
+                $html .= '<a href="javascript:void(0)" class="float-start btn btn-success btn-sm waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
             } else {
-                $html .= '<a href="javascript:void(0)" class="float-start btn btn-subtle-secondary btn-sm waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
+                $html .= '<a href="javascript:void(0)" class="float-start btn btn-secondary btn-sm waves-effect btn-set-image-main" style="padding-bottom: 0px;padding-top: 0px;padding-right: 4px;padding-left: 4px;" data-file-id="' . $media->getCustomProperty('file_id') . '">Main</a>';
             }
             $html .= '</li>';
         }

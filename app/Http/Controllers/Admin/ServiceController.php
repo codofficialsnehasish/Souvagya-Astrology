@@ -30,7 +30,7 @@ class ServiceController extends Controller
             'price' => 'nullable',
             'duration_hours' => 'nullable|integer|min:0',
             'duration_minutes' => 'nullable|integer|min:0|max:59',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'is_active' => 'required|in:1,0'
         ], [
             'image.max' => 'The Employee Image must not be larger than 2 MB.',
@@ -91,7 +91,7 @@ class ServiceController extends Controller
             'price' => 'nullable',
             'duration_hours' => 'nullable|integer|min:0',
             'duration_minutes' => 'nullable|integer|min:0|max:59',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'is_active' => 'required|in:1,0'
         ], [
             'image.max' => 'The Employee Image must not be larger than 2 MB.',

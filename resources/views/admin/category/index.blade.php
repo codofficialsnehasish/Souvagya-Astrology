@@ -70,7 +70,7 @@
                                     </td>
                                     <td class="text-wrap">{{ $loop->iteration }}</td>
                                     <td class="text-wrap">{{ $category->name }}</td>
-                                    <td class="text-wrap">{{ $category->description }} {{ $category->getFirstMediaUrl('category') }}</td>
+                                    <td class="text-wrap">{{ $category->description }}</td>
                                     <td><img class="img-thumbnail rounded me-2" src="{{ $category->getFirstMediaUrl('category') }}" width="100" alt=""></td>
                                     <td>{!! check_status($category->is_visible) !!}</td>
                                     <td class="text-wrap">{{ format_datetime($category->created_at) }}</td>

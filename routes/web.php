@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\{
     ServiceController,
     CategoryController,
     ProductController,
+    MagazineControllers,
 };
 
 use App\Http\Controllers\LocationController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Site\{
     AstrologersController,
     ServicesController,
     ShopsController,
+    MagazineController,
 };
 
 // ========================= Site Routes ==========================
@@ -35,8 +37,15 @@ use App\Http\Controllers\Site\{
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'index'])->name('about');
 Route::get('/astrologers',[AstrologersController::class,'index'])->name('astrologers');
+
 Route::get('/services',[ServicesController::class,'index'])->name('services');
+Route::get('/services-details/{slug}',[ServicesController::class,'service_details'])->name('services.details');
+
 Route::get('/shops',[ShopsController::class,'index'])->name('shops');
+Route::get('/shops-details/{slug}',[ShopsController::class,'product_details'])->name('shops.details');
+
+Route::get('/magazine',[MagazineController::class,'index'])->name('magazine');
+// Route::get('/shops-details/{slug}',[MagazineController::class,'product_details'])->name('shops.details');
 
 Route::get('/contact-us',[ContactController::class,'index'])->name('contact-us');
 Route::post('/contact-us-enquiry',[ContactController::class,'store'])->name('contact-us-enquiry');
@@ -124,6 +133,8 @@ Route::prefix('admin')->group( function (){
         Route::get('enquirys/todays-enquiry',[EnquiryController::class,'todays_enquiry'])->name('enquirys.todays-enquiry');
 
         Route::resource('services',ServiceController::class);
+
+        Route::resource('magazines',MagazineControllers::class);
 
         Route::resource('category', CategoryController::class);
 

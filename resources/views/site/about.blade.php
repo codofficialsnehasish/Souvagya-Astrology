@@ -26,29 +26,29 @@
                     <div class="as_about_slider">
                         <div>
                             <div class="as_aboutimg text-right">
-                                <img src="https://dummyimage.com/463x505" alt="" class="img-responsive">
+                                <img src="{{ asset('site_asset/images/about/about1.png') }}" alt="" class="img-responsive">
                             </div> 
                         </div>
                         <div>
                             <div class="as_aboutimg text-right">
-                                <img src="https://dummyimage.com/463x505" alt="" class="img-responsive">
+                                <img src="{{ asset('site_asset/images/about/about2.png') }}" alt="" class="img-responsive">
                             </div> 
                         </div>
                         <div>
                             <div class="as_aboutimg text-right">
-                                <img src="https://dummyimage.com/463x505" alt="" class="img-responsive">
+                                <img src="{{ asset('site_asset/images/about/about3.png') }}" alt="" class="img-responsive">
                             </div> 
                         </div>
                         <div>
                             <div class="as_aboutimg text-right">
-                                <img src="https://dummyimage.com/463x505" alt="" class="img-responsive">
+                                <img src="{{ asset('site_asset/images/about/about1.png') }}" alt="" class="img-responsive">
                             </div> 
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <h1 class="as_heading">know about Astrology</h1>
-                    <p>t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it esdehas a more-or less normal distribution of letters,</p>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it esdehas a more-or less normal distribution of letters,</p>
                     <p>As opposed to using 'Content here, content here', making it look likesdesdee readable English.Many desktop publishing packages and web page editors sdesnow use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will usdencover many web sites still in their  web page editors sdesnow infancy.</p>
                     <a href="javascript:;" class="as_btn">read more</a>
 
@@ -123,7 +123,7 @@
         </div>
     </section>
 
-    <section class="as_customer_wrapper as_padderBottom80 as_padderTop80">
+    {{-- <section class="as_customer_wrapper as_padderBottom80 as_padderTop80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -180,6 +180,6 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
 
 @endsection

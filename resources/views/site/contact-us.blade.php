@@ -11,7 +11,7 @@
                     <h1>Contact</h1> 
 
                     <ul class="breadcrumb"> 
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li>Contact Us</li>
                     </ul>
                 </div>

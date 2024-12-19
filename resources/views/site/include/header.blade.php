@@ -68,7 +68,7 @@
                     <li><a class="@if(request()->segment(1) == 'services') active @else '' @endif" href="{{ route('services') }}">services</a></li>
                     <li><a class="@if(request()->segment(1) == 'astrologers') active @else '' @endif" href="{{ route('astrologers') }}">Our astrologers</a></li>
                     <li><a class="@if(request()->segment(1) == 'shops') active @else '' @endif" href="{{ route('shops') }}">shop</a></li>
-                    <li><a class="@if(request()->segment(1) == 'home') active @else '' @endif" href="javascript:void(0)">magazine</a></li>
+                    <li><a class="@if(request()->segment(1) == 'magazine') active @else '' @endif" href="{{ route('magazine') }}">magazine</a></li>
                     <li><a class="@if(request()->segment(1) == 'contact-us') active @else '' @endif" href="{{ route('contact-us') }}">contact</a></li>
                 </ul>
             </div>

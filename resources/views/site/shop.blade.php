@@ -11,7 +11,7 @@
                     <h1>shop</h1> 
 
                     <ul class="breadcrumb"> 
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li>shop</li>
                     </ul>
                 </div>
@@ -22,7 +22,26 @@
     <section class="as_product_single_wrapper as_padderBottom80 as_padderTop80">
         <div class="container">
             <div class="row">
+                @foreach($products as $product)
                 <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="as_product_box">
+                        <div class="as_product_img">
+                            <a href="{{ route('shops.details',$product->slug) }}">
+                                <img src="{{ getProductMainImage($product->id) }}" alt="" class="img-responsive">
+                            </a>
+                            <ul>
+                                <li><a href="cart.html"><img src="{{ asset('site_asset/images/svg/wishlist.svg') }}" alt=""></a></li>
+                                <li><a href="cart.html"><img src="{{ asset('site_asset/images/svg/cart.svg') }}" alt=""><span>Add To Card</span></a></li>
+                                <li><a href="shop.html"><img src="{{ asset('site_asset/images/svg/compare.svg') }}" alt=""></a></li>
+                            </ul>
+                        </div> 
+                        <span><img src="{{ asset('site_asset/images/rating.png') }}" alt=""></span>
+                        <h4 class="as_subheading"><a href="{{ route('shops.details',$product->slug) }}">{{ $product->name }}</a></h4>
+                        <span class="as_price">₹{{ $product->total_price }} <del>₹{{ $product->price }}</del> <span class="as_orange">(60% off)</span></span>
+                    </div>
+                </div>
+                @endforeach
+                {{-- <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="as_product_box">
                         <div class="as_product_img">
                             <img src="https://dummyimage.com/286x339" alt="" class="img-responsive">
@@ -133,28 +152,12 @@
                         <h4 class="as_subheading">Gemstone</h4>
                         <span class="as_price">$20 <del>$80</del> <span class="as_orange">(60% off)</span></span>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="as_product_box">
-                        <div class="as_product_img">
-                            <img src="https://dummyimage.com/286x339" alt="" class="img-responsive">
-
-                            <ul>
-                                <li><a href="cart.html"><img src="{{ asset('site_asset/images/svg/wishlist.svg') }}" alt=""></a></li>
-                                <li><a href="cart.html"><img src="{{ asset('site_asset/images/svg/cart.svg') }}" alt=""><span>Add To Card</span></a></li>
-                                <li><a href="shop.html"><img src="{{ asset('site_asset/images/svg/compare.svg') }}" alt=""></a></li>
-                            </ul>
-                        </div> 
-                        <span><img src="{{ asset('site_asset/images/rating.png') }}" alt=""></span>
-                        <h4 class="as_subheading">Gemstone</h4>
-                        <span class="as_price">$20 <del>$80</del> <span class="as_orange">(60% off)</span></span>
-                    </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
 
-    <section class="as_whychoose_wrapper as_padderTop80 as_padderBottom50">
+    {{-- <section class="as_whychoose_wrapper as_padderTop80 as_padderBottom50">
         <div class="container">
             <div class="row as_verticle_center">
                 <div class="col-lg-3 col-md-12">
@@ -415,6 +418,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 @endsection

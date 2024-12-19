@@ -223,6 +223,33 @@
                     </li>
                 </ul>
             </li>
+
+            @can('Astrologer Show')
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon">
+                        <i class="material-icons-outlined">person</i>
+                    </div>
+                    <div class="menu-title">Magazines</div>
+                </a>
+                <ul>
+                    @can('Astrologer Create')
+                    <li>
+                        <a href="{{ route('magazines.create') }}">
+                            <i class="material-icons-outlined">arrow_right</i>Add Magazine
+                        </a>
+                    </li>
+                    @endcan
+                    @can('Astrologer Show')
+                    <li>
+                        <a href="{{ route('magazines.index') }}">
+                            <i class="material-icons-outlined">arrow_right</i>All Magazines
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
         </ul>
         <!--end navigation-->
     </div>

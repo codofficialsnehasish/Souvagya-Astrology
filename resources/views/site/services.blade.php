@@ -11,7 +11,7 @@
                     <h1>Services</h1> 
 
                     <ul class="breadcrumb"> 
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li>services</li>
                     </ul>
                 </div>
@@ -22,19 +22,20 @@
     <section class="as_service_wrapper as_padderTop50 as_padderBottom80">
         <div class="container">
             <div class="row">
-
+                @foreach($services as $service)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="as_service_box text-center">
                         <span class="as_icon">
-                            <img src="{{ asset('site_asset/images/svg/service1.svg') }}" alt="">                                   
+                            <img src="{{ asset($service->image) }}" alt="">                                   
                         </span>
 
-                        <h4 class="as_subheading">Vastu Shastra</h4>
-                        <p>Consectetur adipiscing elit sed do <br>eiusmod tempor incididunt.</p>
-                        <a href="service_detail.html" class="as_link">read more</a>
+                        <h4 class="as_subheading">{{ $service->name }}</h4>
+                        <p>{!! $service->sort_description !!}</p>
+                        <a href="{{ route('services.details',$service->slug) }}" class="as_link">read more</a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                @endforeach
+                {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="as_service_box text-center">
                         <span class="as_icon">
                             <img src="{{ asset('site_asset/images/svg/service2.svg') }}" alt="">                                   
@@ -110,7 +111,7 @@
                         <p>Consectetur adipiscing elit sed do <br>eiusmod tempor incididunt.</p>
                         <a href="service_detail.html" class="as_link">read more</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

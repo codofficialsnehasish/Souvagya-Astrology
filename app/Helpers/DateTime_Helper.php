@@ -23,6 +23,13 @@
         }
     }
 
+    if (!function_exists('format_date')) {
+        function format_date($datetime){
+            $carbonDatetime = Carbon::parse($datetime);
+            return $carbonDatetime->format('F d, Y');
+        }
+    }
+
     if (!function_exists('format_time')) {
         function format_time($datetime){
             $carbontime = Carbon::parse($datetime);

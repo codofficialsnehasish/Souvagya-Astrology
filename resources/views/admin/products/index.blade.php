@@ -76,13 +76,15 @@
                                     <td class="text-wrap">{{ format_datetime($prouct->created_at) }}</td>
                                     <td>
                                         @can('Astrologer Edit')
-                                        <a class="btn btn-primary" href="{{ route('products.basic-info-edit',$prouct->id) }}" alt="edit">Edit</a>
+                                        <a href="{{ route('products.basic-info-edit',$prouct->id) }}" alt="edit"><i class="text-primary" data-feather="edit"></i></a>
                                         @endcan
                                         @can('Astrologer Delete')
                                         <form action="{{ route('products.delete', $prouct->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                            <button type="submit" class="btn">
+                                                <i class="text-danger" data-feather="trash-2"></i>
+                                            </button>
                                         </form>
                                         @endcan
                                     </td>

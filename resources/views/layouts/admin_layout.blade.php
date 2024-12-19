@@ -93,6 +93,11 @@
     <!-- init js -->
     <script src="{{ asset('dashboard_asset/assets/js/form-editor.init.js') }}"></script>
 
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace()
+    </script>
+
     @include('admin.include.notification')
 
     <script>
