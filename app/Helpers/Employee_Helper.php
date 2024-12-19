@@ -1,6 +1,7 @@
 <?php
     use Illuminate\Support\Str;
     use Carbon\Carbon;
+    use App\Models\Product;
 
     if (!function_exists('get_logo')) {
         function get_logo(){
@@ -240,5 +241,52 @@
         function get_city_name($id){
             $city = DB::table('location_cities')->where('id',$id)->value('name');
             return $city;
+        }
+    }
+
+    if (!function_exists('get_cgst')) {
+        function get_cgst($gst_price) {
+            if ($gst_price == 0) {
+                return 0;
+            }
+    
+            $cgst = $gst_price / 2;
+            return round($cgst, 2);
+        }
+    }
+
+    if (!function_exists('get_sgst')) {
+        function get_sgst($gst_price) {
+            if ($gst_price == 0) {
+                return 0;
+            }
+    
+            $sgst = $gst_price / 2;
+            return round($sgst, 2);
+        }
+    }
+    
+    if (!function_exists('formatGSTRate')) {
+        function formatGSTRate($rate,$is_csgst = 0)
+        {
+            if ($rate == 0) {
+                return 0;
+            }
+            if($is_csgst){ return number_format($rate/2, 0) . '%'; }
+            return number_format($rate, 0) . '%';
+        }
+    }
+
+    if(!function_exists('getProductMainImage')){
+        function getProductMainImage($productId){
+            $product = Product::find($productId);
+
+            if (!$product) {
+                return null;
+            }
+            $mainImage = $product->getMedia('products-media')
+                ->firstWhere('custom_properties.is_main', true);
+
+            return $mainImage ? $mainImage->getUrl() : null;
         }
     }

@@ -181,6 +181,48 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon">
+                        <i class="material-icons-outlined">event</i>
+                    </div>
+                    <div class="menu-title">Services</div>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('services.create') }}">
+                            <i class="material-icons-outlined">arrow_right</i>Add Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('services.index') }}">
+                            <i class="material-icons-outlined">arrow_right</i>All Services
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon">
+                        <i class="material-icons-outlined">event</i>
+                    </div>
+                    <div class="menu-title">Products</div>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('category.index') }}">
+                            <i class="material-icons-outlined">arrow_right</i>Category
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('product.index') }}">
+                            <i class="material-icons-outlined">arrow_right</i>Products
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!--end navigation-->
     </div>

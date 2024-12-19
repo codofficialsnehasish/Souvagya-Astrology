@@ -61,3 +61,28 @@
             return $daysInMonth;
         }
     }
+
+
+    if (!function_exists('format_duration')) {
+        /**
+         * Format a duration in minutes into hours and minutes.
+         *
+         * @param int $duration Total duration in minutes.
+         * @return string Formatted duration (e.g., "1 hour 30 minutes").
+         */
+        function format_duration($duration)
+        {
+            $hours = intdiv($duration, 60);
+            $minutes = $duration % 60;
+
+            $formatted = [];
+            if ($hours > 0) {
+                $formatted[] = $hours . ' hour' . ($hours > 1 ? 's' : '');
+            }
+            if ($minutes > 0) {
+                $formatted[] = $minutes . ' minute' . ($minutes > 1 ? 's' : '');
+            }
+
+            return implode(' ', $formatted);
+        }
+    }
