@@ -3,6 +3,7 @@
     use Carbon\Carbon;
     use App\Models\Product;
     use App\Models\AddressBook;
+    use App\Models\Service;
 
     if (!function_exists('get_logo')) {
         function get_logo(){
@@ -314,6 +315,14 @@
             } else {
                 return false;
             }
+        }
+    }
+
+    if (!function_exists('get_visible_services')) {
+        function get_visible_services()
+        {
+            $services = Service::where('is_active',1)->get();
+            return $services;
         }
     }
     
