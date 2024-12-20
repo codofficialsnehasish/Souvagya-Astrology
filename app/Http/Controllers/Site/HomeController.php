@@ -15,12 +15,14 @@ use App\Models\Booking;
 use App\Models\User;
 use App\Models\Prescription;
 use App\Models\PrescriptionDocuments;
+use App\Models\Service;
 
 class HomeController extends Controller
 {
     public function index(){
         $astrologers = User::where('role','astrologer')->where('status',1)->get();
-        return view('site.home',compact('astrologers'));
+        $services = Service::where('is_active',1)->limit(4)->get();
+        return view('site.home',compact('astrologers','services'));
     }
 
     public function astrologer_booking(Request $request){

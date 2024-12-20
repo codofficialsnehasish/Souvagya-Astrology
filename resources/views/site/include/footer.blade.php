@@ -8,8 +8,8 @@
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12">
                     <div class="as_newsletter_box">
-                        <input type="text" name="" id="" class="form-control" placeholder="Enter your Email Here...">
-                        <a href="javascript:;" class="as_btn">subscribe now</a>
+                        <input type="email" id="emailInput" class="form-control" placeholder="Enter your Email Here...">
+                        <a href="javascript:;" id="subscribeBtn" class="as_btn">subscribe now</a>
                     </div>
                 </div>
             </div>

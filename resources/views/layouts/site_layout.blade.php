@@ -271,6 +271,49 @@
 
     </script>
 
+    @include('site.include.cart_script')
+
+    <script>
+        $('#subscribeBtn').on('click', function () {
+            var email = $('#emailInput').val();
+
+            if (email.trim() === "") {
+                round_error_noti("Please enter your email.");
+                return;
+            }
+
+            $.ajax({
+                url: "{{ route('newsletter-subscribe') }}",
+                method: 'POST',
+                data: {
+                    email: email,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    $('#emailInput').val('');
+                    round_success_noti("Thank you for subscribing!");
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors; // Get validation errors
+                        let errorMessages = '';
+
+                        // Loop through errors and append to the message
+                        $.each(errors, function (key, value) {
+                            errorMessages += value[0] + '<br>'; // Add each error message
+                        });
+
+                        // Show all error messages
+                        round_error_noti(errorMessages);
+                    } else {
+                        // Show generic error message
+                        round_error_noti("Something went wrong. Please try again.");
+                    }
+                }
+            });
+        });
+    </script>
+
     @yield('script')
 </body>
 </html>

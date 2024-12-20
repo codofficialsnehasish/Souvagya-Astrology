@@ -65,9 +65,10 @@
                 <ul>
                     <li><a class="@if(request()->segment(1) == '') active @else '' @endif" href="{{ route('home') }}" class="active">home</a></li>
                     <li><a class="@if(request()->segment(1) == 'about') active @else '' @endif" href="{{ route('about') }}">about</a></li>
-                    <li><a class="@if(request()->segment(1) == 'services') active @else '' @endif" href="{{ route('services') }}">services</a></li>
+                    <li><a class="@if(request()->segment(1) == 'services' || request()->segment(1) == 'services-details') active @else '' @endif" href="{{ route('services') }}">services</a></li>
                     <li><a class="@if(request()->segment(1) == 'astrologers') active @else '' @endif" href="{{ route('astrologers') }}">Our astrologers</a></li>
                     <li><a class="@if(request()->segment(1) == 'shops') active @else '' @endif" href="{{ route('shops') }}">shop</a></li>
+                    <li><a class="@if(request()->segment(1) == 'cart') active @else '' @endif" href="{{ route('cart') }}">cart</a></li>
                     <li><a class="@if(request()->segment(1) == 'magazine') active @else '' @endif" href="{{ route('magazine') }}">magazine</a></li>
                     <li><a class="@if(request()->segment(1) == 'contact-us') active @else '' @endif" href="{{ route('contact-us') }}">contact</a></li>
                 </ul>

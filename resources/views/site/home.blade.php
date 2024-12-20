@@ -212,18 +212,20 @@
                     <p class="as_font14 as_padderBottom5">Consectetur adipiscing elit, sed do eiusmod tempor incididuesdeentiut labore <br>etesde dolore magna aliquapspendisse and the gravida.</p>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                @foreach($services as $service)
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="as_service_box text-center">
                         <span class="as_icon">
-                            <img src="{{ asset('site_asset/images/svg/service1.svg') }}" alt="">                                   
+                            <img src="{{ asset($service->image) }}" alt="">                                   
                         </span>
 
-                        <h4 class="as_subheading">Vastu Shastra</h4>
-                        <p>Consectetur adipiscing elit sed do <br>eiusmod tempor incididunt.</p>
-                        <a href="javascript:;" class="as_link">read more</a>
+                        <h4 class="as_subheading">{{ $service->name }}</h4>
+                        <p>{!! $service->sort_description !!}</p>
+                        <a href="{{ route('services.details',$service->slug) }}" class="as_link">read more</a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                @endforeach
+                {{-- <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="as_service_box text-center">
                         <span class="as_icon">
                             <img src="{{ asset('site_asset/images/svg/service2.svg') }}" alt="">                                   
@@ -299,7 +301,7 @@
                         <p>Consectetur adipiscing elit sed do <br>eiusmod tempor incididunt.</p>
                         <a href="javascript:;" class="as_link">read more</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -478,42 +480,42 @@
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="as_whychoose_box text-center">
                                 <span class="as_number"><span><span data-from="0" data-to="512"
-                                    data-speed="5000">512</span>+</span><img src="assets/images/svg/shape.svg" alt=""></span>
+                                    data-speed="5000">512</span>+</span><img src="{{ asset('site_asset/images/svg/shape.svg') }}" alt=""></span>
                                 <h4>Qualified Astrologers</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="as_whychoose_box text-center">
                                 <span class="as_number"><span><span data-from="0" data-to="62"
-                                    data-speed="5000">62</span>+</span><img src="assets/images/svg/shape.svg" alt=""></span>
+                                    data-speed="5000">62</span>+</span><img src="{{ asset('site_asset/images/svg/shape.svg') }}" alt=""></span>
                                 <h4>Success Horoscope</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="as_whychoose_box text-center">
                                 <span class="as_number"><span><span data-from="0" data-to="94"
-                                    data-speed="5000">94</span>+</span><img src="assets/images/svg/shape.svg" alt=""></span>
+                                    data-speed="5000">94</span>+</span><img src="{{ asset('site_asset/images/svg/shape.svg') }}" alt=""></span>
                                 <h4>Offices Worldwide</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="as_whychoose_box text-center">
                                 <span class="as_number"><span><span data-from="0" data-to="452"
-                                    data-speed="5000">452+</span>+</span><img src="assets/images/svg/shape.svg" alt=""></span>
+                                    data-speed="5000">452+</span>+</span><img src="{{ asset('site_asset/images/svg/shape.svg') }}" alt=""></span>
                                 <h4>Trust by million clients</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="as_whychoose_box text-center">
                                 <span class="as_number"><span><span data-from="0" data-to="12"
-                                    data-speed="5000">12</span>+</span><img src="assets/images/svg/shape.svg" alt=""></span>
+                                    data-speed="5000">12</span>+</span><img src="{{ asset('site_asset/images/svg/shape.svg') }}" alt=""></span>
                                 <h4>Year experience</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="as_whychoose_box text-center">
                                 <span class="as_number"><span><span data-from="0" data-to="652"
-                                    data-speed="5000">652+</span>+</span><img src="assets/images/svg/shape.svg" alt=""></span>
+                                    data-speed="5000">652+</span>+</span><img src="{{ asset('site_asset/images/svg/shape.svg') }}" alt=""></span>
                                 <h4>Type of horoscopes</h4>
                             </div>
                         </div>
@@ -729,7 +731,7 @@
         </div>
     </section> --}}
 
-    <section class="as_overview_wrapper as_padderBottom80 as_padderTop80">
+    {{-- <section class="as_overview_wrapper as_padderBottom80 as_padderTop80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -758,7 +760,7 @@
                 </div>
             </div>
         </div>
-    </section>   
+    </section>    --}}
 
 @endsection
 

@@ -57,18 +57,18 @@
                         <div class="prod_quantity as_padderBottom40">
                             Quantity
                             <div class="quantity">
-                                <button type="button" class="qty_button minus">
-                                    -                </button>
+                                <button type="button" class="qty_button minus">-</button>
                                 <input type="text" id="quantity_6041ce9eca5d6" class="input-text form-control qty text" step="1" min="1" max="100" name="quantity" value="1" title="Qty" inputmode="numeric">
-                                    
-                                <button type="button" class="qty_button plus">
-                                        +                </button>
-                                </div>
+                                <button type="button" class="qty_button plus">+</button>
+                            </div>
                         </div>
                         <div class="product_buy">
-                            <a href="shop.html" class="buy_btn as_btn">Buy Now</a>
-                            <a href="#" class="ad_wishlist">Add To Wishlist 
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <button type="button" id="add-to-cart-btn" class="buy_btn as_btn" data-product-id="{{ $product->id }}">Add To Cart</button>
+                            <a href="https://wa.me/7031182870?text=Hello,%20I%20am%20interested%20in%20this%20product:%20{{ request()->url() }}" 
+                                target="_blank" 
+                                class="contact_whatsapp ad_wishlist">
+                                <img src="{{ asset('site_asset/images/whats-app.png') }}" alt="" style="height: 22px;">
+                                Contact on WhatsApp
                             </a>
                         </div>
                     </div>

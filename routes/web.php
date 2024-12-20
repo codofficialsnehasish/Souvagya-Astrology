@@ -30,6 +30,8 @@ use App\Http\Controllers\Site\{
     ServicesController,
     ShopsController,
     MagazineController,
+    NewsletterSubscription,
+    CartController,
 };
 
 // ========================= Site Routes ==========================
@@ -45,11 +47,11 @@ Route::get('/shops',[ShopsController::class,'index'])->name('shops');
 Route::get('/shops-details/{slug}',[ShopsController::class,'product_details'])->name('shops.details');
 
 Route::get('/magazine',[MagazineController::class,'index'])->name('magazine');
-// Route::get('/shops-details/{slug}',[MagazineController::class,'product_details'])->name('shops.details');
 
 Route::get('/contact-us',[ContactController::class,'index'])->name('contact-us');
 Route::post('/contact-us-enquiry',[ContactController::class,'store'])->name('contact-us-enquiry');
 
+Route::post('/newsletter-subscribe',[NewsletterSubscription::class,'store'])->name('newsletter-subscribe');
 
 Route::post('/astrologer-booking', [HomeController::class, 'astrologer_booking'])->name('astrologer-booking');
 
@@ -60,6 +62,15 @@ Route::get('/user-logout',[Authentication::class,'user_logout'])->name('user-log
 Route::post('/process-update-profile',[Authentication::class,'process_update_profile'])->name('process-update-profile')->middleware('auth');
 
 Route::get('/user-dashboard',[UserDashboard::class,'index'])->name('user-dashboard')->middleware('auth');
+
+
+Route::get('cart',[CartController::class, 'index'])->name('cart');
+Route::post('/add-to-cart', [CartController::class, 'add_to_cart'])->name('add-to-cart');
+
+
+
+
+
 
 
 // ======================== Admin Routes =============================

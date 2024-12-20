@@ -30,9 +30,7 @@
                                 <img src="{{ getProductMainImage($product->id) }}" alt="" class="img-responsive">
                             </a>
                             <ul>
-                                <li><a href="cart.html"><img src="{{ asset('site_asset/images/svg/wishlist.svg') }}" alt=""></a></li>
-                                <li><a href="cart.html"><img src="{{ asset('site_asset/images/svg/cart.svg') }}" alt=""><span>Add To Card</span></a></li>
-                                <li><a href="shop.html"><img src="{{ asset('site_asset/images/svg/compare.svg') }}" alt=""></a></li>
+                                <li><a href="javascript:void(0);" id="add-to-cart-btn" data-product-id="{{ $product->id }}"><img src="{{ asset('site_asset/images/svg/cart.svg') }}" alt=""><span>Add To Card</span></a></li>
                             </ul>
                         </div> 
                         <span><img src="{{ asset('site_asset/images/rating.png') }}" alt=""></span>
