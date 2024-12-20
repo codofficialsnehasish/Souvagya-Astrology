@@ -1,6 +1,6 @@
 @extends('layouts.site_layout')
 
-@section('title') Services @endsection
+@section('title') Cart @endsection
 
 @section('content')
 
@@ -34,7 +34,7 @@
                                     <th>Action</th>
                                 </tr>
                                 @foreach($carts as $cart)
-                                <tr>
+                                <tr data-id="{{ $cart->id }}">
                                     <td>
                                         <span class="prod_thumb">
                                             <img src="{{ getProductMainImage($cart->product->id) }}" alt="" class="img-responsive">
@@ -53,26 +53,24 @@
                                             </div>
                                         </div>
                                         {{-- <input type="number" name="pro_quantity" class="pro_quantity form-control" value="1"></td> --}}
-                                    <td>₹{{ $cart->product->total_price * $cart->quantity }}</td>
+                                    <td class="prod_total_price">₹{{ $cart->product->total_price * $cart->quantity }}</td>
                                     <td>
-                                        <span class="close_pro"><i class="fa fa-trash"></i></span>
+                                        <span class="close_pro">
+                                            <img src="{{ asset('site_asset/images/svg/delete-red.svg') }}" style="height: 30px;" alt="">
+                                        </span>
                                     </td>
                                 </tr>
                                 @endforeach
                                 <tr>
                                     <td colspan="3">
-                                        <div class="cupon_code_wrap">
-                                            <input type="text" name="cupon_code" placeholder="####" class="cupon_code form-control">
-                                            <button type="submit" class="cupon_btn as_btn" value="Apply Cupon Code">Apply Coupon Code</button>
-                                        </div>
                                     </td>
                                     <td>Total</td>
-                                    <td>$899</td>
+                                    <td id="cart-total"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <a href="javascript:void(0)" class="proceed_btn as_btn" value="Apply Cupon Code">checkout</a>
+                    <a href="{{ route('checkout') }}" class="proceed_btn as_btn" value="Apply Cupon Code">checkout</a>
                 </div>
             </div>
         </div>

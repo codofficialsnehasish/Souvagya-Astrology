@@ -19,6 +19,25 @@ class CartController extends Controller
         return view('site.cart',compact('carts'));
     }
 
+    public function cartCount()
+    {
+        $userId = Auth::check() ? Auth::id() : Cookie::get('guest_user_id');
+        $cartCount = Cart::where('user_id', $userId)->count();
+
+        return response()->json(['count' => $cartCount]);
+    }
+
+    public function sum_cart_total(){
+        $userId = Auth::check() ? Auth::id() : Cookie::get('guest_user_id');
+        $carts = Cart::where('user_id', $userId)->with('product')->get();
+
+        $totalPrice = $carts->sum(function ($cart) {
+            return $cart->product->total_price * $cart->quantity;
+        });
+
+        return response()->json(['total' => $totalPrice]);
+    }
+
     public function add_to_cart(Request $request){
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|integer|exists:products,id',
@@ -51,5 +70,33 @@ class CartController extends Controller
         ]);
 
         return response()->json(['status'=>'true','massage'=>$cartItem->product->name.' Added to Cart Successfully']);
+    }
+
+    public function updateCartQuantity(Request $request, $id)
+    {
+        $cart = Cart::find($id);
+        if ($cart) {
+            $newQuantity = $request->quantity;
+            if ($newQuantity >= 1) {
+                $cart->quantity = $newQuantity;
+                $cart->save();
+                $total_price = $cart->product->total_price * $cart->quantity;
+                return response()->json(['success' => 'Quantity updated successfully.','total_price'=>$total_price]);
+            }
+            return response()->json(['error' => 'Invalid quantity.'], 400);
+        }
+        return response()->json(['error' => 'Item not found.'], 404);
+    }
+
+
+    public function deleteCartItem($id)
+    {
+        $cart = Cart::find($id);
+        if ($cart) {
+            $msg = $cart->product->name.' Deleted from Cart Successfully';
+            $cart->delete();
+            return response()->json(['status'=>'true','massage' => $msg]);
+        }
+        return response()->json(['error' => 'Item not found.'], 404);
     }
 }

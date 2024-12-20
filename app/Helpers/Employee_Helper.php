@@ -2,6 +2,7 @@
     use Illuminate\Support\Str;
     use Carbon\Carbon;
     use App\Models\Product;
+    use App\Models\AddressBook;
 
     if (!function_exists('get_logo')) {
         function get_logo(){
@@ -290,3 +291,29 @@
             return $mainImage ? $mainImage->getUrl() : null;
         }
     }
+
+    if (!function_exists('get_address_by_id')) {
+        function get_address_by_id($id)
+        {
+            // Retrieve the address record by ID
+            $address = AddressBook::find($id);
+    
+            if ($address) {
+                $html = '';
+    
+                // Append address details
+                $html .= $address->billing_address . ', ';
+                $html .= $address->billing_zip_code . ', ';
+    
+                // Append location names
+                $html .= optional($address->country)->name . ', ';
+                $html .= optional($address->state)->name . ', ';
+                $html .= optional($address->city)->name;
+    
+                return $html;
+            } else {
+                return false;
+            }
+        }
+    }
+    

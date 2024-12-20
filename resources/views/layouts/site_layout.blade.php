@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- favicon -->
     <link rel="shortcut icon" href="{{ asset('site_asset/images/favicon.png') }}" type="image/x-icon">
@@ -15,10 +16,49 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/js/plugin/airdatepicker/datepicker.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/css/fonts.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/css/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/js/plugin/select2/select2.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('dashboard_asset/assets/plugins/notifications/css/lobibox.min.css') }}">
     
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 
+    <style>
+        .custom-badge {
+            color: var(--secondary-color);
+            /* display: inline-block;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 0px 9px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            position: relative;
+            top: -5px;
+            left: 5px; */
+        }
+
+        /* Blinking white circle effect */
+        @keyframes outer-circle-blink {
+            0% {
+                box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        /* Class for applying the white blinking effect */
+        .outer-circle {
+            border-radius: 12%;
+            display: inline-block;
+            padding: 5px 10px;
+            animation: outer-circle-blink 1s infinite;
+        }
+
+
+    </style>
     @yield('style')
 </head>
 <body>
@@ -111,6 +151,7 @@
     <script src="{{ asset('site_asset/js/plugin/airdatepicker/datepicker.min.js') }}"></script>
     <script src="{{ asset('site_asset/js/plugin/airdatepicker/i18n/datepicker.en.js') }}"></script>
     <script src="{{ asset('site_asset/js/custom.js') }}"></script>  
+    <script type="text/javascript" src="{{ asset('site_asset/js/plugin/select2/select2.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
@@ -312,6 +353,58 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#checkout-email').on('blur', function() {
+                var email = $(this).val().trim();
+
+                if (email != "") {
+                    $.ajax({
+                        url: "{{ route('send-verification-code') }}",
+                        method: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            email: email
+                        },
+                        success: function(response) {
+                            $('#verification_code_div').show();
+                            $('#verification_code').attr('required', true);
+                            round_success_noti('Verification code sent to your email.');
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            const response = xhr.responseJSON || {}; 
+                            round_error_noti(response.message);
+                        }
+                    });
+                }
+            });
+
+            $('#checkout-email-code').on('blur', function() {
+                var code = $(this).val();
+
+                if (code != "") {
+                    $.ajax({
+                        url: "{{ route('verify-code') }}",
+                        method: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            code: code
+                        },
+                        success: function(response) {
+                            round_success_noti('Verified Successfully');
+                        },
+                        error: function(response) {
+                            round_error_noti('Error verifying the code.');
+                            $('#checkout-email-code').val('');
+                        }
+                    });
+                }
+            });
+        });
+
     </script>
 
     @yield('script')

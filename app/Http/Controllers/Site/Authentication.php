@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Cart;
 use App\Mail\VerificationCodeMail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class Authentication extends Controller
 {
@@ -58,6 +60,7 @@ class Authentication extends Controller
             $user = User::where('email', Session::get('email'))->first();
 
             Auth::login($user);
+            $this->migrateGuestCartToUser();
 
             // Check if the authenticated user's email_verified_at is empty
             if (is_null(Auth::user()->email_verified_at)) {
@@ -81,12 +84,32 @@ class Authentication extends Controller
         }
     }
 
+    protected function migrateGuestCartToUser(): void
+    {
+        $user = Auth::user();
+
+        $guestUserId = Cookie::get('guest_user_id');
+
+        if ($guestUserId) {
+            $guestCartItems = Cart::where('user_id', $guestUserId)->get();
+
+            foreach ($guestCartItems as $cartItem) {
+                $cartItem->update(['user_id' => $user->id]);
+            }
+
+            Cookie::queue(Cookie::forget('guest_user_id'));
+        }
+    }
+
     public function process_submit_details(Request $request){
         // Auth::user()->update([
         //     'name' => $request->name,
         //     'phone' => $request->mobile,
         //     'gender' => $request->gender
         // ]);
+        $request->validate([
+            'mobile' => 'required|digits:10|regex:/^[6789]/|unique:users,phone'
+        ]);
 
         $user = Auth::user();
         $user->name = $request->name;

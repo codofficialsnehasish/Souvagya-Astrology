@@ -32,6 +32,7 @@ use App\Http\Controllers\Site\{
     MagazineController,
     NewsletterSubscription,
     CartController,
+    Checkout,
 };
 
 // ========================= Site Routes ==========================
@@ -65,9 +66,15 @@ Route::get('/user-dashboard',[UserDashboard::class,'index'])->name('user-dashboa
 
 
 Route::get('cart',[CartController::class, 'index'])->name('cart');
-Route::post('/add-to-cart', [CartController::class, 'add_to_cart'])->name('add-to-cart');
+Route::post('/cart/add-to-cart', [CartController::class, 'add_to_cart'])->name('add-to-cart');
+Route::get('/cart/count', [CartController::class, 'cartCount'])->name('cart.count');
+Route::get('/cart/total', [CartController::class, 'sum_cart_total'])->name('cart.total');
+Route::patch('/cart/{id}', [CartController::class, 'updateCartQuantity'])->name('cart.update');
+Route::delete('/cart/{id}', [CartController::class, 'deleteCartItem'])->name('cart.delete');
 
 
+Route::get('checkout',[Checkout::class, 'index'])->name('checkout');
+Route::post('checkout/process',[Checkout::class, 'process_checkout'])->name('checkout.process');
 
 
 
