@@ -112,8 +112,9 @@ class Checkout extends Controller
                 $order_item->product_id = $cart_item->product_id;
                 $order_item->product_name = $cart_item->product->name;
                 $order_item->quantity = $cart_item->quantity;
-                $order_item->price = $cart_item->product->total_price;
-                $order_item->subtotal = $cart_item->product->total_price * $cart_item->quantity;
+                $order_item->price = $cart_item->product->price;
+                // $order_item->price = $cart_item->product->total_price;
+                $order_item->subtotal = $cart_item->product->price * $cart_item->quantity;
                 $order_item->save();
             }
 

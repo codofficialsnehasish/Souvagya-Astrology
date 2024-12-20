@@ -250,6 +250,17 @@
                 </ul>
             </li>
             @endcan
+
+            @can('Booking Show')
+            <li>
+                <a href="{{ route('order.index') }}" class="">
+                    <div class="parent-icon">
+                        <i class="material-icons-outlined">event</i>
+                    </div>
+                    <div class="menu-title">Orders</div>
+                </a>
+            </li>
+            @endcan
         </ul>
         <!--end navigation-->
     </div>

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\{
     CategoryController,
     ProductController,
     MagazineControllers,
+    OrderController,
 };
 
 use App\Http\Controllers\LocationController;
@@ -189,6 +190,16 @@ Route::prefix('admin')->group( function (){
                 Route::post('product-addons-update','product_addons_update')->name('products.product-addons-update');
 
                 Route::delete('delete/{id}','destroy')->name('products.delete');
+            });
+        });
+
+        Route::controller(OrderController::class)->group( function() {
+            Route::prefix('orders')->group( function(){
+                Route::get('','index')->name('order.index');
+                Route::get('{id}/details','show')->name('order.details');
+                Route::post('update-order-status','update_order_status')->name('order.update-order-status');
+                Route::post('update-payment-status','update_payment_status')->name('order.update-payment-status');
+                Route::delete('{id}/destroy','destroy')->name('order.destroy');
             });
         });
     });

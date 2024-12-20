@@ -14,6 +14,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Enquiry;
+use App\Models\Order;
 
 class UserDashboard extends Controller
 {
@@ -26,9 +27,10 @@ class UserDashboard extends Controller
                 ->get();
         }
         $enquirys = Enquiry::where('user_id',Auth::id())->orderBy('id','desc')->get();
+        $orders = Order::where('user_id',Auth::id())->orderBy('id','desc')->get();
         $countrys = Country::where('is_visible',1)->get();
         $states = State::where('country_id',Auth::user()->permanent_country)->get();
         $cities = City::where('state_id',Auth::user()->permanent_state)->get();
-        return view('site.user_dashboard',compact('bookings','countrys','states','cities','enquirys'));
+        return view('site.user_dashboard',compact('bookings','countrys','states','cities','enquirys','orders'));
     }
 }

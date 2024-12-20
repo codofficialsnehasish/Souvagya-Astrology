@@ -23,4 +23,9 @@ class AddressBook extends Model
     {
         return $this->belongsTo(City::class, 'billing_city', 'id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'address_book_id');
+    }
 }
