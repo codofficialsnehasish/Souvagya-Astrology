@@ -42,6 +42,8 @@ class Checkout extends Controller
         }
 
         $this->place_order();
+
+        return redirect(route('user-dashboard'))->with('success','Order Placed Successfully');
     }
 
     protected function clear_default_address($user_id){
@@ -117,8 +119,6 @@ class Checkout extends Controller
 
             //clear cart
             $cart_items = Cart::where('user_id', Auth::id())->delete(); 
-
-            return redirect(route('user-dashboard'))->with('success','Order Placed Successfully');
         }
     }
 }
