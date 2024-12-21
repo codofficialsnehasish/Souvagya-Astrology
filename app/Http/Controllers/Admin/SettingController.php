@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Settings Show', ['only' => ['index']]);
+        $this->middleware('role_or_permission:Settings Edit', ['only' => ['edit','update']]);
+    }
+
     public function index()
     {
         $setting = Settings::findOrFail(1);

@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class MagazineControllers extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Magazine Show', ['only' => ['index']]);
+        $this->middleware('role_or_permission:Magazine Create', ['only' => ['create','store']]);
+        $this->middleware('role_or_permission:Magazine Edit', ['only' => ['edit','update']]);
+        $this->middleware('role_or_permission:Magazine Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $magazines = Magazine::all();

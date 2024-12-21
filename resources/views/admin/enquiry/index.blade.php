@@ -52,7 +52,7 @@
                                             <th>Subject</th>
                                             <th>Message</th>
                                             <th>Status</th>
-                                            @canany(['Astrologer Edit','Astrologer Delete'])
+                                            @canany(['Enquiry Edit','Enquiry Delete'])
                                             <th>Action</th>
                                             @endcanany
                                         </tr>
@@ -70,12 +70,12 @@
                                             <td>{{ $enquiry->subject }}</td>
                                             <td>{{ $enquiry->message }}</td>
                                             <td>{{ $enquiry->status }}</td>
-                                            @canany(['Astrologer Edit','Astrologer Delete'])
+                                            @canany(['Enquiry Edit','Enquiry Delete'])
                                             <td>
-                                                @can('Astrologer Edit')
+                                                @can('Enquiry Edit')
                                                 <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$enquiry->id}}" alt="edit">Reply</a>
                                                 @endcan
-                                                @can('Astrologer Delete')
+                                                @can('Enquiry Delete')
                                                 <form action="{{ route('enquiry.destroy', $enquiry->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

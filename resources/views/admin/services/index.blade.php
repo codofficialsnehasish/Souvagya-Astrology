@@ -34,7 +34,7 @@
                     <div class="col-auto flex-grow-1 overflow-auto">
                     </div>
                     <div class="col-auto">
-                        @can('Astrologer Create')
+                        @can('Service Create')
                         <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                             <a class="btn btn-primary px-4" href="{{ route('services.create') }}"><i class="bi bi-plus-lg me-2"></i>Add New Service</a>
                         </div>
@@ -59,7 +59,7 @@
                                             <th>Duration</th>
                                             <th>Image</th>
                                             <th>Status</th>
-                                            @canany(['Astrologer Edit','Astrologer Delete'])
+                                            @canany(['Service Edit','Service Delete'])
                                             <th>Action</th>
                                             @endcanany
                                         </tr>
@@ -79,12 +79,12 @@
                                                 <img class="img-thumbnail rounded me-2" src="{{ asset($service->image) }}" width="200" alt="">
                                             </td>
                                             <td>{!! check_status($service->is_active) !!}</td>
-                                            @canany(['Astrologer Edit','Astrologer Delete'])
+                                            @canany(['Service Edit','Service Delete'])
                                             <td>
-                                                @can('Astrologer Edit')
+                                                @can('Service Edit')
                                                 <a class="btn btn-primary" href="{{ route('services.edit',$service->id) }}" alt="edit">Edit</a>
                                                 @endcan
-                                                @can('Astrologer Delete')
+                                                @can('Service Delete')
                                                 <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

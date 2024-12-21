@@ -33,7 +33,7 @@
             <div class="col-auto flex-grow-1 overflow-auto">
             </div>
             <div class="col-auto">
-                @can('Astrologer Create')
+                @can('Product Create')
                 <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                     <a class="btn btn-primary px-4" href="{{ route('products.basic-info-create') }}"><i class="bi bi-plus-lg me-2"></i>Add New Products</a>
                 </div>
@@ -57,7 +57,9 @@
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
+                                    @canany(['Product Edit','Product Delete'])
                                     <th>Action</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,11 +76,12 @@
                                     <td><img class="img-thumbnail rounded me-2" src="{{ getProductMainImage($prouct->id) }}" width="100" alt=""></td>
                                     <td>{!! check_status($prouct->is_visible) !!}</td>
                                     <td class="text-wrap">{{ format_datetime($prouct->created_at) }}</td>
+                                    @canany(['Product Edit','Product Delete'])
                                     <td>
-                                        @can('Astrologer Edit')
+                                        @can('Product Edit')
                                         <a href="{{ route('products.basic-info-edit',$prouct->id) }}" alt="edit"><i class="text-primary" data-feather="edit"></i></a>
                                         @endcan
-                                        @can('Astrologer Delete')
+                                        @can('Product Delete')
                                         <form action="{{ route('products.delete', $prouct->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -88,6 +91,7 @@
                                         </form>
                                         @endcan
                                     </td>
+                                    @endcanany
                                 </tr>
                                 @endforeach
                             </tbody>

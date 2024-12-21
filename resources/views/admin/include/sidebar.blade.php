@@ -22,12 +22,14 @@
                     <div class="menu-title">Dashboard</div>
                 </a>
             </li>
+            @canany(['Settings Show', 'Settings Edit'])
             <li>
                 <a href="{{ route('settings.index') }}" class="">
                     <div class="parent-icon"><i class="material-icons-outlined">settings</i></div>
                     <div class="menu-title">Settings</div>
                 </a>
             </li>
+            @endcanany
             @canany(['Permission Show', 'Role Show'])
             <li>
                 <a href="javascript:;" class="has-arrow">
@@ -167,6 +169,7 @@
             </li>
             @endcan
 
+            @can('Enquiry Show')
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
@@ -187,7 +190,9 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
+            @canany(['Service Show', 'Service Create'])
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
@@ -196,19 +201,25 @@
                     <div class="menu-title">Services</div>
                 </a>
                 <ul>
+                    @can('Service Create')
                     <li>
                         <a href="{{ route('services.create') }}">
                             <i class="material-icons-outlined">arrow_right</i>Add Services
                         </a>
                     </li>
+                    @endcan
+                    @can('Service Show')
                     <li>
                         <a href="{{ route('services.index') }}">
                             <i class="material-icons-outlined">arrow_right</i>All Services
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
+            @endcanany
 
+            @can('Product Show')
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
@@ -217,11 +228,13 @@
                     <div class="menu-title">Products</div>
                 </a>
                 <ul>
+                    @can('Category Show')
                     <li>
                         <a href="{{ route('category.index') }}">
                             <i class="material-icons-outlined">arrow_right</i>Category
                         </a>
                     </li>
+                    @endcan
                     <li>
                         <a href="{{ route('product.index') }}">
                             <i class="material-icons-outlined">arrow_right</i>Products
@@ -229,8 +242,9 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
-            @can('Astrologer Show')
+            @canany(['Magazine Show', 'Magazine Create'])
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
@@ -239,14 +253,14 @@
                     <div class="menu-title">Magazines</div>
                 </a>
                 <ul>
-                    @can('Astrologer Create')
+                    @can('Magazine Create')
                     <li>
                         <a href="{{ route('magazines.create') }}">
                             <i class="material-icons-outlined">arrow_right</i>Add Magazine
                         </a>
                     </li>
                     @endcan
-                    @can('Astrologer Show')
+                    @can('Magazine Show')
                     <li>
                         <a href="{{ route('magazines.index') }}">
                             <i class="material-icons-outlined">arrow_right</i>All Magazines
@@ -255,9 +269,9 @@
                     @endcan
                 </ul>
             </li>
-            @endcan
+            @endcanany
 
-            @can('Booking Show')
+            @can('Order Show')
             <li>
                 <a href="{{ route('order.index') }}" class="">
                     <div class="parent-icon">

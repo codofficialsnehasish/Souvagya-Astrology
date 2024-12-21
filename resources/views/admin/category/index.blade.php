@@ -33,7 +33,7 @@
             <div class="col-auto flex-grow-1 overflow-auto">
             </div>
             <div class="col-auto">
-                @can('Astrologer Create')
+                @can('Category Create')
                 <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                     <a class="btn btn-primary px-4" href="{{ route('category.create') }}"><i class="bi bi-plus-lg me-2"></i>Add New Category</a>
                 </div>
@@ -57,7 +57,9 @@
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
+                                    @canany(['Category Edit','Category Delete'])
                                     <th>Action</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,11 +76,12 @@
                                     <td><img class="img-thumbnail rounded me-2" src="{{ $category->getFirstMediaUrl('category') }}" width="100" alt=""></td>
                                     <td>{!! check_status($category->is_visible) !!}</td>
                                     <td class="text-wrap">{{ format_datetime($category->created_at) }}</td>
+                                    @canany(['Category Edit','Category Delete'])
                                     <td>
-                                        @can('Astrologer Edit')
+                                        @can('Category Edit')
                                         <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}" alt="edit">Edit</a>
                                         @endcan
-                                        @can('Astrologer Delete')
+                                        @can('Category Delete')
                                         <form action="{{ route('category.destroy', $category->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -86,6 +89,7 @@
                                         </form>
                                         @endcan
                                     </td>
+                                    @endcanany
                                 </tr>
                                 @endforeach
                             </tbody>

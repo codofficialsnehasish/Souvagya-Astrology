@@ -56,10 +56,14 @@
                                             <td class="text-wrap"><a href="{{ route('order.details',$order->id) }}">{{ $order->order_number }}</a></td>
                                             <td class="text-wrap">{{ $order->total_amount }}</td>
                                             <td class="text-wrap">{{ get_address_by_id($order->address_book_id) }}</td>
+                                            @canany(['Order Show','Order Delete'])
                                             <td>
+                                                @can('Order Show')
                                                 <a href="{{ route('order.details',$order->id) }}" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                                                     <i class="text-primary" data-feather="eye"></i>
                                                 </a>
+                                                @endcan
+                                                @can('Order Delete')
                                                 <form action="{{ route('order.destroy', $order->id) }}" onsubmit="return confirm('Are you sure?')" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
@@ -67,7 +71,9 @@
                                                         <i class="text-danger" data-feather="trash-2"></i>
                                                     </button>
                                                 </form>
+                                                @endcan
                                             </td>
+                                            @endcanany
                                         </tr>
                                         @endforeach
                                     </tbody>

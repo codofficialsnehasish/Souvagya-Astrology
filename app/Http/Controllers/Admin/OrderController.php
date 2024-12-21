@@ -19,6 +19,11 @@ use App\Models\AddressBook;
 
 class OrderController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Order Show', ['only' => ['index','show']]);
+        $this->middleware('role_or_permission:Order Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $orders = Order::orderBy('id','desc')->get();

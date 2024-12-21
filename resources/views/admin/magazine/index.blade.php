@@ -34,7 +34,7 @@
                     <div class="col-auto flex-grow-1 overflow-auto">
                     </div>
                     <div class="col-auto">
-                        @can('Astrologer Create')
+                        @can('Magazine Create')
                         <div class="d-flex align-items-center gap-2 justify-content-lg-end">
                             <a class="btn btn-primary px-4" href="{{ route('magazines.create') }}"><i class="bi bi-plus-lg me-2"></i>Add New Magazine</a>
                         </div>
@@ -58,7 +58,7 @@
                                             <th>Image</th>
                                             <th>PDF</th>
                                             <th>Status</th>
-                                            @canany(['Astrologer Edit','Astrologer Delete'])
+                                            @canany(['Magazine Edit','Magazine Delete'])
                                             <th>Action</th>
                                             @endcanany
                                         </tr>
@@ -86,12 +86,12 @@
                                                 </a>
                                             </td>
                                             <td>{!! check_status($magazine->is_visible) !!}</td>
-                                            @canany(['Astrologer Edit','Astrologer Delete'])
+                                            @canany(['Magazine Edit','Magazine Delete'])
                                             <td>
-                                                @can('Astrologer Edit')
+                                                @can('Magazine Edit')
                                                 <a class="btn btn-primary" href="{{ route('magazines.edit',$magazine->id) }}" alt="edit">Edit</a>
                                                 @endcan
-                                                @can('Astrologer Delete')
+                                                @can('Magazine Delete')
                                                 <form action="{{ route('magazines.destroy', $magazine->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

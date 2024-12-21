@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class EnquiryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Enquiry Show', ['only' => ['index','todays_enquiry']]);
+        $this->middleware('role_or_permission:Enquiry Edit', ['only' => ['edit','update']]);
+        $this->middleware('role_or_permission:Enquiry Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $enquirys = Enquiry::all();

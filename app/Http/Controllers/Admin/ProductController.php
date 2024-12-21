@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Product Show', ['only' => ['index']]);
+        $this->middleware('role_or_permission:Product Create', ['only' => ['basic_info_create','basic_info_process']]);
+        $this->middleware('role_or_permission:Product Edit', ['only' => ['basic_info_edit','basic_info_edit_process','price_edit','price_edit_process','product_images_edit','product_images_process']]);
+        $this->middleware('role_or_permission:Product Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $proucts = Product::all();

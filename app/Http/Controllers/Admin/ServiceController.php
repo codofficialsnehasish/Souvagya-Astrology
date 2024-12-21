@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role_or_permission:Service Show', ['only' => ['index']]);
+        $this->middleware('role_or_permission:Service Create', ['only' => ['create','store']]);
+        $this->middleware('role_or_permission:Service Edit', ['only' => ['edit','update']]);
+        $this->middleware('role_or_permission:Service Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $services = Service::all();
