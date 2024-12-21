@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\{
     ProductController,
     MagazineControllers,
     OrderController,
+    SettingController,
 };
 
 use App\Http\Controllers\LocationController;
@@ -202,6 +203,8 @@ Route::prefix('admin')->group( function (){
                 Route::delete('{id}/destroy','destroy')->name('order.destroy');
             });
         });
+
+        Route::resource('settings', SettingController::class);
     });
     Route::post('booking/check-astrologer-availability',[BookingController::class,'check_astrologer_availability'])->name('booking.check-astrologer-availability');
     

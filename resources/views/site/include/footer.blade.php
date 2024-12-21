@@ -20,16 +20,16 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="as_footer_widget">
                     <div class="as_footer_logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('site_asset/images/logo-souvagya.png') }}" alt=""></a>
+                        <a href="{{ route('home') }}"><img src="{{ optional(general_settings())->getFirstMediaUrl('logo') ?? '' }}" alt=""></a>
                     </div>
                     <p>Consectetur adipiscing elited doesde eiusmod tempor incididunt ust labore et dolore magna aliqua.</p>
 
                     <div class="as_share_box">
                         <p>Follow Us</p>
                         <ul>
-                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/facebook.svg') }}" alt=""></a></li>
-                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/twitter.svg') }}" alt=""></a></li>
-                            <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/google.svg') }}" alt=""></a></li>
+                            <li><a href="{{ optional(general_settings())->facebook_link ?? '' }}"><img src="{{ asset('site_asset/images/svg/facebook.svg') }}" alt=""></a></li>
+                            <li><a href="{{ optional(general_settings())->twitter_link ?? '' }}"><img src="{{ asset('site_asset/images/svg/twitter.svg') }}" alt=""></a></li>
+                            <li><a href="{{ optional(general_settings())->instagram_link ?? '' }}"><img src="{{ asset('site_asset/images/svg/google.svg') }}" alt=""></a></li>
                             <li><a href="javascript:;"><img src="{{ asset('site_asset/images/svg/youtube.svg') }}" alt=""></a></li>
                         </ul>
                     </div>
@@ -78,21 +78,18 @@
                     <ul class="as_contact_list">
                         <li>
                             <img src="{{ asset('site_asset/images/svg/map.svg') }}" alt="">
-                            <p>Gotham Hall, 1356 Brodway squore,
-                            NY 10018, California, USA</p>
+                            <p>{{ optional(general_settings())->address ?? '' }}</p>
                         </li>
                         <li>
                             <img src="{{ asset('site_asset/images/svg/address.svg') }}" alt="">
                             <p>
-                                <a href="javascript:;">astrology@example.com</a>
-                                <a href="javascript:;">astro@example.com</a>
+                                <a href="mailto:{{ optional(general_settings())->primary_email ?? '' }}">{{ optional(general_settings())->primary_email ?? '' }}</a>
                             </p> 
                         </li> 
                         <li>
                             <img src="{{ asset('site_asset/images/svg/call.svg') }}" alt="">
                             <p>
-                                <a href="javascript:;">+ (91) 1800-124-105</a><br>
-                                <a href="javascript:;">+ (91) 1800-326-324</a>
+                                <a href="javascript:;">{{ optional(general_settings())->primary_phone ?? '' }}</a><br>
                             </p>
                         </li>
                     </ul>

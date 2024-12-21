@@ -33,8 +33,7 @@
                                     <span class="as_icon"><img src="{{ asset('site_asset/images/svg/call1.svg') }}" alt=""></span>
                                     <div class="as_info">
                                         <h5>Call Us</h5>
-                                        <p class="as_margin0 as_font14">+ (91) 1800-124-105</p>
-                                        <p class="as_margin0 as_font14">+ (91) 1800-326-324</p>
+                                        <p class="as_margin0 as_font14">{{ optional(general_settings())->primary_phone ?? '' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -43,8 +42,7 @@
                                     <span class="as_icon"><img src="{{ asset('site_asset/images/svg/mail.svg') }}" alt=""></span>
                                     <div class="as_info">
                                         <h5>Mail Us</h5>
-                                        <p class="as_margin0 as_font14"><a href="javascript:;"> astrology@example.com</a></p>
-                                        <p class="as_margin0 as_font14"><a href="javascript:;"></a>astro@example.com</a></p>
+                                        <p class="as_margin0 as_font14"><a href="mailto:{{ optional(general_settings())->primary_email ?? '' }}">{{ optional(general_settings())->primary_email ?? '' }}</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +85,7 @@
         </div>
     </section>
     <section class="as_map_section">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d921.4943697226569!2d88.37331526952428!3d22.505028137695827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0271307230ec8d%3A0x1ea9cf7f463a9f14!2s62%2FA%2C%20Selimpur%20Rd%2C%20Dhakuria%2C%20Selimpur%2C%20Kolkata%2C%20West%20Bengal%20700031!5e0!3m2!1sen!2sin!4v1733723075167!5m2!1sen!2sin" width="100%" height="743" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        {!! optional(general_settings())->google_map ?? '' !!}
     </section>
 
 @endsection

@@ -5,9 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | Souvagya</title>
+    <title>@yield('title') | {{ optional(general_settings())->site_title ?? '' }}</title>
+    <meta content="{{ optional(general_settings())->site_description ?? '' }}" name="description">
     <!--favicon-->
-    <link rel="icon" href="{{ asset('dashboard_asset/assets/images/favicon-32x32.png') }}" type="image/png">
+    <link rel="icon" href="{{ optional(general_settings())->getFirstMediaUrl('favicon') ?? '' }}" type="image/png">
     <!-- loader-->
     <link href="{{ asset('dashboard_asset/assets/css/pace.min.css') }}" rel="stylesheet">
     <script src="{{ asset('dashboard_asset/assets/js/pace.min.js') }}"></script>

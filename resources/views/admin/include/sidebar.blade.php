@@ -3,11 +3,11 @@
 
     <div class="sidebar-header">
         <div class="logo-icon">
-            <img src="{{ asset('dashboard_asset/assets/images/logo-icon.png') }}" class="logo-img" alt="">
+            <img src="{{ optional(general_settings())->getFirstMediaUrl('logo') ?? '' }}" class="logo-img" alt="">
         </div>
-        <div class="logo-name flex-grow-1">
+        {{-- <div class="logo-name flex-grow-1">
             <h5 class="mb-0">Souvagya</h5>
-        </div>
+        </div> --}}
         <div class="sidebar-close">
             <span class="material-icons-outlined">close</span>
         </div>
@@ -20,6 +20,12 @@
                 <a href="{{ route('dashboard') }}" class="">
                     <div class="parent-icon"><i class="material-icons-outlined">home</i></div>
                     <div class="menu-title">Dashboard</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('settings.index') }}" class="">
+                    <div class="parent-icon"><i class="material-icons-outlined">settings</i></div>
+                    <div class="menu-title">Settings</div>
                 </a>
             </li>
             @canany(['Permission Show', 'Role Show'])

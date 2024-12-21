@@ -1,7 +1,7 @@
 <section class="as_header_wrapper">
     <div class="as_logo">
         <a href="{{ route('home') }}" style="height: 60px;width: 148px;">
-            <img src="{{ asset('site_asset/images/logo-souvagya.png') }}" alt="">
+            <img src="{{ optional(general_settings())->getFirstMediaUrl('logo') ?? '' }}" alt="">
         </a>
     </div>
     <div class="as_header_detail">
@@ -18,12 +18,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:;">
+                    <a href="mailto:{{ optional(general_settings())->primary_email ?? '' }}">
                         <div class="as_infobox">
                             <span class="as_infoicon">
                                 <img src="{{ asset('site_asset/images/svg/mail1.svg') }}" alt="">
                             </span>
-                        <span class="as_orange">Talk to our Astrogers -</span>support@website.com
+                        <span class="as_orange">Talk to our Astrogers -</span>{{ optional(general_settings())->primary_email ?? '' }}
                         </div>
                     </a>
                 </li>

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@yield('title') | Souvagya</title>
+    <title>@yield('title') | {{ optional(general_settings())->site_title ?? '' }}</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta content="{{ optional(general_settings())->site_description ?? '' }}" name="description">
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="{{ asset('site_asset/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ optional(general_settings())->getFirstMediaUrl('favicon') ?? '' }}" type="image/x-icon">
 
     <!-- stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('site_asset/css/bootstrap.min.css') }}">
@@ -77,7 +78,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; 2022 Souvagya. All Right Reserved.</p>
+                        <p>{{ optional(general_settings())->copyright ?? '' }}</p>
                     </div>
                 </div>
             </div>
