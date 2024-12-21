@@ -5,7 +5,7 @@
             <a href="javascript:;"><i class="material-icons-outlined">menu</i></a>
         </div>
 
-        <div class="search-bar flex-grow-1">
+        <div class="search-bar flex-grow-1 d-none">
             <div class="position-relative">
                 <input class="form-control rounded-5 px-5 search-control d-lg-block d-none" type="text" placeholder="Search">
                 <span class="material-icons-outlined position-absolute d-lg-block d-none ms-3 translate-middle-y start-0 top-50">search</span>
@@ -107,16 +107,16 @@
             </div>
         </div>
 
-        <ul class="navbar-nav gap-1 nav-right-links align-items-center">
-            <li class="nav-item d-lg-none mobile-search-btn">
-                <a class="nav-link" href="javascript:;"><i class="material-icons-outlined">search</i></a>
+        <ul class="navbar-nav ms-auto gap-1 nav-right-links align-items-center">
+            <li class="nav-item d-lg-none mobile-search-btn d-none">
+                <a class="nav-link d-none" href="javascript:;"><i class="material-icons-outlined">search</i></a>
             </li>
 
             
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside"
+                <a class="nav-link d-none dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside"
                     data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">apps</i></a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-apps shadow-lg p-3">
+                <div class="dropdown-menu dropdown-menu-end dropdown-apps shadow-lg d-none p-3">
                     <div class="border rounded-4 overflow-hidden">
                     <div class="row row-cols-3 g-0 border-bottom">
                         <div class="col border-end">
@@ -254,11 +254,11 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" data-bs-auto-close="outside"
+                <a class="nav-link d-none dropdown-toggle dropdown-toggle-nocaret position-relative" data-bs-auto-close="outside"
                     data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">notifications</i>
                     <!-- <span class="badge-notify">5</span> -->
                 </a>
-                <div class="dropdown-menu dropdown-notify dropdown-menu-end shadow">
+                <div class="dropdown-menu dropdown-notify dropdown-menu-end shadow d-none">
                     <div class="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
                     <h5 class="notiy-title mb-0">Notifications</h5>
                     <div class="dropdown">

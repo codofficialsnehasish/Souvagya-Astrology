@@ -150,7 +150,7 @@
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
-                        <i class="material-icons-outlined">event</i>
+                        <i class="material-icons-outlined">calendar_today</i>
                     </div>
                     <div class="menu-title">Attendance</div>
                 </a>
@@ -173,7 +173,7 @@
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
-                        <i class="material-icons-outlined">event</i>
+                        <i class="material-icons-outlined">question_answer</i>
                     </div>
                     <div class="menu-title">Enquiry</div>
                 </a>
@@ -196,7 +196,7 @@
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
-                        <i class="material-icons-outlined">event</i>
+                        <i class="material-icons-outlined">miscellaneous_services</i>
                     </div>
                     <div class="menu-title">Services</div>
                 </a>
@@ -223,7 +223,7 @@
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
-                        <i class="material-icons-outlined">event</i>
+                        <i class="material-icons-outlined">inventory_2</i>
                     </div>
                     <div class="menu-title">Products</div>
                 </a>
@@ -248,7 +248,7 @@
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
-                        <i class="material-icons-outlined">person</i>
+                        <i class="material-icons-outlined">menu_book</i>
                     </div>
                     <div class="menu-title">Magazines</div>
                 </a>
@@ -275,7 +275,7 @@
             <li>
                 <a href="{{ route('order.index') }}" class="">
                     <div class="parent-icon">
-                        <i class="material-icons-outlined">event</i>
+                        <i class="material-icons-outlined">shopping_bag</i>
                     </div>
                     <div class="menu-title">Orders</div>
                 </a>
