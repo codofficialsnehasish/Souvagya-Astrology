@@ -79,8 +79,8 @@ class ProductController extends Controller
         // $product->product_type = $request->product_type;
         $product->sort_description = $request->sort_description;
         $product->long_description = $request->long_description;
-        $product->veg = $request->veg_non_veg;
-        $product->is_available = $request->is_available;
+        // $product->veg = $request->veg_non_veg;
+        // $product->is_available = $request->is_available;
         $product->is_special = $request->is_special;
         $product->is_visible = $request->is_visible;
         $res = $product->update();

@@ -196,6 +196,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <!--end main wrapper-->
 </main>

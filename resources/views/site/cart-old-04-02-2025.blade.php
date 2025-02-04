@@ -48,7 +48,7 @@
                                         <div class="prod_quantity as_padderBottom40">
                                             <div class="quantity">
                                                 <button type="button" class="qty_button minus">-</button>
-                                                <input type="text" id="quantity_6041ce9eca5d6" class="input-text count-control form-control qty text" step="1" min="1" max="100" name="quantity" value="{{ $cart->quantity }}" title="Qty" inputmode="numeric">
+                                                <input type="text" id="quantity_6041ce9eca5d6" class="input-text form-control qty text" step="1" min="1" max="100" name="quantity" value="{{ $cart->quantity }}" title="Qty" inputmode="numeric">
                                                 <button type="button" class="qty_button plus">+</button>
                                             </div>
                                         </div>

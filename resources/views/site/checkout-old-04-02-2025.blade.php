@@ -70,16 +70,16 @@
                                             <input type="text" placeholder="Email*" name="email" id="checkout-email" value="{{ old('email') }}" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 text-dark" id="verification_code_div" style="display:none;">
+                                    <div class="col-lg-6 col-md-6" id="verification_code_div" style="display:none;">
                                         <div class="form-group">
                                             <input type="text" placeholder="Verification Code*" name="verification_code" id="checkout-email-code" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 ">
-                                        <div class="form-group as_select_box ">
-                                            <select class="form-control checkout-color" id="country_id" name="country" required>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group as_select_box">
+                                            <select class="form-control" id="country_id" name="country" required>
                                                 @foreach($countrys as $country)
-                                                <option class="checkout-color" value="{{ $country->id }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

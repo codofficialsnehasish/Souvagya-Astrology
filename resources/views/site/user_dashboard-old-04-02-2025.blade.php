@@ -111,7 +111,7 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="country_id" class="form-label">Country</label>
-                                                    <select class="form-select form-control" id="country_id" name="country">
+                                                    <select class="form-select" id="country_id" name="country">
                                                         <option selected disabled value>Choose...</option>
                                                         @foreach($countrys as $country)
                                                         <option @if(Auth::user()->permanent_country == $country->id) selected @endif value="{{ $country->id }}">{{ $country->name }}</option>
@@ -120,7 +120,7 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="states_id" class="form-label">State</label>
-                                                    <select class="form-select form-control" id="states_id" name="state">
+                                                    <select class="form-select" id="states_id" name="state">
                                                         <option selected disabled value>Please Choose Country</option>
                                                         @foreach($states as $state)
                                                         <option @if(Auth::user()->permanent_state == $state->id) selected @endif value="{{ $state->id }}">{{ $state->name }}</option>
@@ -129,7 +129,7 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="citys_id" class="form-label">City</label>
-                                                    <select class="form-select form-control" id="citys_id" name="city">
+                                                    <select class="form-select" id="citys_id" name="city">
                                                         <option selected disabled value>Please Choose State</option>
                                                         @foreach($cities as $citie)
                                                         <option @if(Auth::user()->permanent_city == $citie->id) selected @endif value="{{ $citie->id }}">{{ $citie->name }}</option>
@@ -141,15 +141,15 @@
                                                     <label for="pin_code" class="form-label">Zip</label>
                                                     <input type="text" class="form-control" name="pin_code" id="pin_code" placeholder="Zip Code" value="{{ Auth::user()->pin_code }}">
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="col-md-12">
                                                     <label for="address" class="form-label">Address</label>
                                                     <textarea class="form-control" name="address" id="address" placeholder="Address ..." rows="4" cols="4">{{ Auth::user()->address }}</textarea>
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="col-md-12">
                                                     <label for="input11" class="form-label">Change Profile Image</label>
-                                                    <input class="form-control h-auto" name="user_image" type="file">
+                                                    <input class="form-control" name="user_image" type="file">
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="col-md-12">
                                                     <div class="d-md-flex d-grid align-items-center gap-3">
                                                         <button type="submit" class="as_btn">Update Profile</button>
                                                     </div>
@@ -164,16 +164,16 @@
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach($bookings as $booking)
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-heading-{{ $booking->id }}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ $booking->id }}" aria-expanded="false" aria-controls="flush-collapse-{{ $booking->id }}">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                             Booking Date : {!! formated_date($booking->booking_date) !!} , Astrologer : {{ $booking->astrologer->name }}
                                         </button>
                                     </h2>
-                                    <div id="flush-collapse-{{ $booking->id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{ $booking->id }}" data-bs-parent="#accordionFlushExample">
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body" style="color: #5b6166;">
                                             Booking Date : {!! formated_date($booking->booking_date) !!}
                                             Astrologer : {{ $booking->astrologer->name }}
-                        
+
                                             <div class="bg-light mx-3 my-0 rounded-3 p-3">
                                                 @foreach ($booking->prescriptions as $item)
                                                 <div class="notes-item">
@@ -210,34 +210,21 @@
                                 @endforeach
                             </div>
                         </div>
-                        
                         <div class="tab-pane fade" id="primary-pills-enquiry" role="tabpanel">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach($enquirys as $enquiry)
                                 <div class="accordion-item">
-                                    <!-- Use a unique ID for the header -->
-                                    <h2 class="accordion-header" id="flush-heading-{{ $enquiry->id }}">
-                                        <button 
-                                            class="accordion-button collapsed" 
-                                            type="button" 
-                                            data-bs-toggle="collapse" 
-                                            data-bs-target="#flush-collapse-{{ $enquiry->id }}" 
-                                            aria-expanded="false" 
-                                            aria-controls="flush-collapse-{{ $enquiry->id }}">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                             Enquiry Date : {!! formated_date($enquiry->created_at) !!} , Subject : {{ $enquiry->subject }}, Status : {{ $enquiry->status }}
                                         </button>
                                     </h2>
-                                    <!-- Use a unique ID for the collapse element -->
-                                    <div 
-                                        id="flush-collapse-{{ $enquiry->id }}" 
-                                        class="accordion-collapse collapse" 
-                                        aria-labelledby="flush-heading-{{ $enquiry->id }}" 
-                                        data-bs-parent="#accordionFlushExample">
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body" style="color: #5b6166;">
                                             Enquiry Date : {!! formated_date($enquiry->created_at) !!}<br>
                                             Subject : {{ $enquiry->subject }}<br>
                                             Message : {{ $enquiry->message }}<br><hr><br>
-                        
+
                                             Admin Reply : {{ $enquiry->admin_reply }}
                                             @if($enquiry->admin_reply)
                                             Replied at : {!! formated_date($enquiry->updated_at) !!}
@@ -248,29 +235,16 @@
                                 @endforeach
                             </div>
                         </div>
-                        
                         <div class="tab-pane fade" id="primary-pills-orders" role="tabpanel">
-                            <div class="accordion accordion-flush" id="accordionFlushExampleOrders">
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach($orders as $order)
                                 <div class="accordion-item">
-                                    <!-- Use unique IDs for the header -->
-                                    <h2 class="accordion-header" id="flush-heading-order-{{ $order->id }}">
-                                        <button 
-                                            class="accordion-button collapsed" 
-                                            type="button" 
-                                            data-bs-toggle="collapse" 
-                                            data-bs-target="#flush-collapse-order-{{ $order->id }}" 
-                                            aria-expanded="false" 
-                                            aria-controls="flush-collapse-order-{{ $order->id }}">
-                                            Order Date: {!! format_datetime($order->created_at) !!} , Order Number: {{ $order->order_number }}
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Order Date : {!! format_datetime($order->created_at) !!} , Order number : {{ $order->order_number }}
                                         </button>
                                     </h2>
-                                    <!-- Use unique IDs for the collapse element -->
-                                    <div 
-                                        id="flush-collapse-order-{{ $order->id }}" 
-                                        class="accordion-collapse collapse" 
-                                        aria-labelledby="flush-heading-order-{{ $order->id }}" 
-                                        data-bs-parent="#accordionFlushExampleOrders">
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body" style="color: #5b6166;">
                                             @php 
                                                 $order_items = $order->items; 
@@ -287,7 +261,7 @@
                                                                     <div class="row mb-0">
                                                                         <label for="example-text-input" class="col-sm-4 col-form-label">Delivery Partner</label>
                                                                         <div class="col-sm-8">
-                                                                            <strong class="font-right">{{ $delivery_partner[0]->name }} ({{ $delivery_partner[0]->mobile_no }})</strong>
+                                                                            <strong class="font-right">{{ $delivery_partner[0]->name }} ({{$delivery_partner[0]->mobile_no}}) </strong>
                                                                         </div>
                                                                     </div>
                                                                     @endif
@@ -305,18 +279,54 @@
                                                                             <strong class="font-right">{{ $order->order_number }}</strong>
                                                                         </div>
                                                                     </div>
+                                                                    {{-- <div class="row mb-0">
+                                                                        <label for="example-text-input" class="col-sm-4 col-form-label">Order Type</label>
+                                                                        <div class="col-sm-8">
+                                                                            <strong class="font-right" id="order_type">{{ ucfirst($order->order_type) }}</strong>
+                                                                        </div>
+                                                                    </div> --}}
                                                                     <div class="row mb-0">
                                                                         <label for="example-text-input" class="col-sm-4 col-form-label">Order Date</label>
                                                                         <div class="col-sm-8">
                                                                             <strong class="font-right" id="order_type">{{ format_datetime($order->created_at) }}</strong>
                                                                         </div>
                                                                     </div>
+                                                                    {{-- <div class="row mb-0">
+                                                                        <label for="example-text-input" class="col-sm-4 col-form-label">Payment Method</label>
+                                                                        <div class="col-sm-8">
+                                                                            <strong class="font-right">
+                                                                                {{ ucfirst($order->payment_method) }}
+                                                                            </strong>
+                                                                        </div>
+                                                                    </div> --}}
+                                                                    {{-- <div class="row mb-0">
+                                                                        <label for="example-text-input" class="col-sm-4 col-form-label">Currency</label>
+                                                                        <div class="col-sm-8">
+                                                                            <strong class="font-right">{{ $order->price_currency }}</strong>
+                                                                        </div>
+                                                                    </div> --}}
+                                                                    {{-- <div class="row mb-0">
+                                                                        <label for="example-text-input" class="col-sm-4 col-form-label">Payment Status</label>
+                                                                        <div class="col-sm-8">
+                                                                            <strong class="font-right">{{ ucfirst($order->payment_status) }}</strong>
+                                                                            @if($order->payment_status == 'Awaiting Payment' && $order->order_status != 'Cancelled' && $order->order_status != 'Rejected' && $order->payment_method == 'Cash On Delevery')
+                                                                            <a href="#" class="btn btn-primary" data-bs-placement="top"  title="Edit this Item" data-bs-toggle="modal" data-bs-target="#updatePaymentStatusModal_<?= $order->id; ?>"><i class="fa fa-edit option-icon"></i>Update Payment Status</a>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div> --}}
+                                                                    {{-- <div class="row mb-0">
+                                                                        <label for="example-text-input" class="col-sm-4 col-form-label">Payment Date</label>
+                                                                        <div class="col-sm-8">
+                                                                            <strong class="font-right">{{ $order->payment_date ? format_datetime($order->payment_date) : '' }}</strong>
+                                                                        </div>
+                                                                    </div> --}}
                                                                 </div>
+                                                                
                                                                 <div class="col-lg-6">
                                                                     <div class="row mb-0">
                                                                         <label for="example-text-input" class="col-sm-4 col-form-label">Name</label>
                                                                         <div class="col-sm-8">
-                                                                            <strong class="font-right">{{ $buyer_details->shipping_first_name .' '. $buyer_details->shipping_last_name }}</strong>
+                                                                            <strong class="font-right">{{ $buyer_details->shipping_first_name .' '.$buyer_details->shipping_last_name }}</strong>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-0">
@@ -325,12 +335,14 @@
                                                                             <strong class="font-right">{{ $buyer_details->shipping_phone_number }}</strong>
                                                                         </div>
                                                                     </div>
+                                    
                                                                     <div class="row mb-0">
                                                                         <label for="example-text-input" class="col-sm-4 col-form-label">Email</label>
                                                                         <div class="col-sm-8">
                                                                             <strong class="font-right">{{ $buyer_details->shipping_email }}</strong>
                                                                         </div>
                                                                     </div>
+                                    
                                                                     <div class="row mb-3">
                                                                         <label for="example-text-input" class="col-sm-4 col-form-label">Address</label>
                                                                         <div class="col-sm-8">
@@ -343,55 +355,74 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                    
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card">
                                                         <div class="card-header bg-primary text-light">Order Items</div>
                                                         <div class="card-body">
-                                                            <table class="table table-striped table-bordered dt-responsive nowrap">
+                                                            <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                                 <thead>
                                                                     <tr>
+                                                                        {{-- <th>Product Id</th> --}}
                                                                         <th>Product</th>
                                                                         <th>Unit Price</th>
                                                                         <th>Quantity</th>
                                                                         <th>Gst</th>
                                                                         <th>Total</th>
+                                                                        <!-- <th class="max-width-120">Options</th> -->
                                                                     </tr>
                                                                 </thead>
+                                    
                                                                 <tbody>
                                                                     @php $subtotal = 0; @endphp
+                                                                    @php $gst = 0; @endphp
+                                                                    @php $shipping = 0; @endphp
                                                                     @foreach ($order_items as $item)
                                                                     <tr>
+                                                                        {{-- <td>{{ $item->product_id }}</td> --}}
                                                                         <td>{{ $item->product_name }}</td>
                                                                         <td>{{ $item->price }}</td>
                                                                         <td>{{ $item->quantity }}</td>
                                                                         <td>{{ 0.00 }}</td>
                                                                         @php $subtotal += $item->subtotal @endphp
                                                                         <td>{{ $item->subtotal }}</td>
+                                                                        <!-- <td>
+                                                                            <div class="dropdown">
+                                                                                <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    Options <i class="mdi mdi-chevron-down"></i>
+                                                                                </button>
+                                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                                    <a href="#" class="dropdown-item" data-bs-placement="top"  title="Edit this Item" data-bs-toggle="modal" data-bs-target="#updateStatusModal_<?= $item->id; ?>"><i class="fa fa-edit option-icon"></i>Update order Status</a>
+                                                                                    <div class="dropdown-divider"></div>
+                                                                                    <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item"> <i class="fas fa-trash-alt text-danger" title="Remove"></i> Delete</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td> -->
                                                                     </tr>
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>
                                                             <div class="col-lg-4 float-end">
                                                                 <div class="row mb-0">
-                                                                    <label class="col-sm-4 col-form-label float-end">Subtotal</label>
-                                                                    <div class="col-sm-8"><strong class="float-end">{{ $subtotal ?? 0 }}</strong></div>
+                                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Subtotal</label>
+                                                                    <div class="col-sm-8"><strong class="float-end">{{ $subtotal }}</strong></div>
                                                                 </div>
                                                                 <div class="row mb-0">
-                                                                    <label class="col-sm-4 col-form-label float-end">GST</label>
-                                                                    <div class="col-sm-8"><strong class="float-end">{{ $gst ?? 0 }}</strong></div>
+                                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">GST</label>
+                                                                    <div class="col-sm-8"><strong class="float-end">{{ $gst }}</strong></div>
                                                                 </div>
                                                                 <div class="row mb-0">
-                                                                    <label class="col-sm-4 col-form-label float-end">Shipping</label>
-                                                                    <div class="col-sm-8"><strong class="float-end">{{ $shipping ?? 0 }}</strong></div>
+                                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Shipping</label>
+                                                                    <div class="col-sm-8"><strong class="float-end">{{ $shipping }}</strong></div>
                                                                 </div>
                                                                 <div class="row mb-0">
-                                                                    <label class="col-sm-4 col-form-label float-end">Discount</label>
-                                                                    <div class="col-sm-8"><strong class="float-end">{{ $order->discounted_price ?? 0 }}</strong></div>
+                                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Discount</label>
+                                                                    <div class="col-sm-8"><strong class="float-end">{{ $order->discounted_price }}</strong></div>
                                                                 </div>
                                                                 <div class="row mb-0">
-                                                                    <label class="col-sm-4 col-form-label float-end">Total</label>
-                                                                    <div class="col-sm-8"><strong class="float-end">{{ $order->total_amount ?? 0 }}</strong></div>
+                                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Total</label>
+                                                                    <div class="col-sm-8"><strong class="float-end">{{ $order->total_amount }}</strong></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -404,7 +435,6 @@
                                 @endforeach
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
