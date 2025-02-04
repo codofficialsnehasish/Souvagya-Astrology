@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Cart;
 use App\Mail\VerificationCodeMail;
@@ -107,9 +108,16 @@ class Authentication extends Controller
         //     'phone' => $request->mobile,
         //     'gender' => $request->gender
         // ]);
-        $request->validate([
-            'mobile' => 'required|digits:10|regex:/^[6789]/|unique:users,phone'
-        ]);
+        // $request->validate([
+        //     'mobile' => 'required|digits:10|regex:/^[6789]/|unique:users,phone'
+        // ]);
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
+        //     'mobile' => 'required|digits:10|regex:/^[6789]/|unique:users,phone'
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator->errors());
+        // }
 
         $user = Auth::user();
         $user->name = $request->name;

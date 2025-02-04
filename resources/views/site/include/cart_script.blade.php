@@ -1,6 +1,6 @@
 <script>
     $(document).ready(function() {
-        $('#add-to-cart-btn').on('click', function() {
+        $('.add-to-cart-btn').on('click', function() {
             var productId = $(this).data('product-id');
             var quantity = $('#quantity_6041ce9eca5d6').val();  // Get the quantity input value
             

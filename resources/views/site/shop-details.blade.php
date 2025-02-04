@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="product_buy">
-                            <button type="button" id="add-to-cart-btn" class="buy_btn as_btn" data-product-id="{{ $product->id }}">Add To Cart</button>
+                            <button type="button" class="add-to-cart-btn" class="buy_btn as_btn" data-product-id="{{ $product->id }}">Add To Cart</button>
                             <a href="https://wa.me/7031182870?text=Hello,%20I%20am%20interested%20in%20this%20product:%20{{ request()->url() }}" 
                                 target="_blank" 
                                 class="contact_whatsapp ad_wishlist">
