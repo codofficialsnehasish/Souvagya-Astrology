@@ -220,6 +220,9 @@ span#select2-citys_id-container {
     width: auto;
     transition: 0.2s linear;
 }
+.shop-img{
+    min-height: 286px;
+}
 .as_btn:hover:after {
     border-left-color: var(--dark-color1);
 }

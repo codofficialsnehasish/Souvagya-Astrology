@@ -212,10 +212,9 @@
                         </div>
                         
                         <div class="tab-pane fade" id="primary-pills-enquiry" role="tabpanel">
-                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion accordion-flush" id="accordionEnquiry">
                                 @foreach($enquirys as $enquiry)
                                 <div class="accordion-item">
-                                    <!-- Use a unique ID for the header -->
                                     <h2 class="accordion-header" id="flush-heading-{{ $enquiry->id }}">
                                         <button 
                                             class="accordion-button collapsed" 
@@ -224,23 +223,24 @@
                                             data-bs-target="#flush-collapse-{{ $enquiry->id }}" 
                                             aria-expanded="false" 
                                             aria-controls="flush-collapse-{{ $enquiry->id }}">
-                                            Enquiry Date : {!! formated_date($enquiry->created_at) !!} , Subject : {{ $enquiry->subject }}, Status : {{ $enquiry->status }}
+                                            Enquiry Date: {!! formated_date($enquiry->created_at) !!}, 
+                                            Subject: {{ $enquiry->subject }}, 
+                                            Status: {{ $enquiry->status }}
                                         </button>
                                     </h2>
-                                    <!-- Use a unique ID for the collapse element -->
                                     <div 
                                         id="flush-collapse-{{ $enquiry->id }}" 
                                         class="accordion-collapse collapse" 
                                         aria-labelledby="flush-heading-{{ $enquiry->id }}" 
-                                        data-bs-parent="#accordionFlushExample">
+                                        data-bs-parent="#accordionEnquiry">
                                         <div class="accordion-body" style="color: #5b6166;">
-                                            Enquiry Date : {!! formated_date($enquiry->created_at) !!}<br>
-                                            Subject : {{ $enquiry->subject }}<br>
-                                            Message : {{ $enquiry->message }}<br><hr><br>
+                                            <strong>Enquiry Date:</strong> {!! formated_date($enquiry->created_at) !!}<br>
+                                            <strong>Subject:</strong> {{ $enquiry->subject }}<br>
+                                            <strong>Message:</strong> {!! nl2br(e($enquiry->message)) !!}<br><hr><br>
                         
-                                            Admin Reply : {{ $enquiry->admin_reply }}
+                                            <strong>Admin Reply:</strong> {{ $enquiry->admin_reply ?? 'No reply yet' }}
                                             @if($enquiry->admin_reply)
-                                            Replied at : {!! formated_date($enquiry->updated_at) !!}
+                                            <br><strong>Replied at:</strong> {!! formated_date($enquiry->updated_at) !!}
                                             @endif
                                         </div>
                                     </div>
@@ -248,6 +248,8 @@
                                 @endforeach
                             </div>
                         </div>
+                        
+                        
                         
                         <div class="tab-pane fade" id="primary-pills-orders" role="tabpanel">
                             <div class="accordion accordion-flush" id="accordionFlushExampleOrders">
@@ -281,7 +283,7 @@
                                                     <div class="card">
                                                         <div class="card-header bg-primary text-light">Order Details</div>
                                                         <div class="card-body">
-                                                            <div class="row">
+                                                            <div class="row text-light">
                                                                 <div class="col-lg-6">
                                                                     @if(!empty($delivery_partner))
                                                                     <div class="row mb-0">
@@ -343,12 +345,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row text-light">
                                                 <div class="col-12">
                                                     <div class="card">
                                                         <div class="card-header bg-primary text-light">Order Items</div>
                                                         <div class="card-body">
-                                                            <table class="table table-striped table-bordered dt-responsive nowrap">
+                                                            <table class="table table-striped table-bordered dt-responsive nowrap text-light">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Product</th>
@@ -361,7 +363,7 @@
                                                                 <tbody>
                                                                     @php $subtotal = 0; @endphp
                                                                     @foreach ($order_items as $item)
-                                                                    <tr>
+                                                                    <tr class="text-light">
                                                                         <td>{{ $item->product_name }}</td>
                                                                         <td>{{ $item->price }}</td>
                                                                         <td>{{ $item->quantity }}</td>
@@ -372,7 +374,7 @@
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>
-                                                            <div class="col-lg-4 float-end">
+                                                            <div class="col-lg-4 float-end text-light">
                                                                 <div class="row mb-0">
                                                                     <label class="col-sm-4 col-form-label float-end">Subtotal</label>
                                                                     <div class="col-sm-8"><strong class="float-end">{{ $subtotal ?? 0 }}</strong></div>

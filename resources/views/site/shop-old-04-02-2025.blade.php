@@ -27,7 +27,7 @@
                     <div class="as_product_box">
                         <div class="as_product_img">
                             <a href="{{ route('shops.details',$product->slug) }}">
-                                <img src="{{ getProductMainImage($product->id) }}" alt="" class="img-responsive shop-img" >
+                                <img src="{{ getProductMainImage($product->id) }}" alt="" class="img-responsive">
                             </a>
                             <ul>
                                 <li><a href="javascript:void(0);" class="add-to-cart-btn" data-product-id="{{ $product->id }}"><img src="{{ asset('site_asset/images/svg/cart.svg') }}" alt=""><span>Add To Card</span></a></li>

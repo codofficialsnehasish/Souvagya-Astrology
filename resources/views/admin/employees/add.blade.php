@@ -111,8 +111,8 @@
                                             </div>
                                         </div>
                                         <div class="d-md-flex d-grid align-items-center gap-3">
-                                            <button type="submit" class="btn btn-grd-primary px-4">Submit</button>
-                                            <button type="reset" class="btn btn-grd-info px-4">Reset</button>
+                                            <button type="submit" class="btn text-light btn-grd-primary px-4">Submit</button>
+                                            <button type="reset" class="btn text-light btn-grd-info px-4">Reset</button>
                                         </div>
                                     </div>
                                 </div>

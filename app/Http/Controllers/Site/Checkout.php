@@ -33,7 +33,11 @@ class Checkout extends Controller
 
     public function process_checkout(Request $request){
         if($request->addrradio == 'fornewaddr'){
-            $this->saveaddress($request);
+            // $this->saveaddress($request);
+            $response = $this->saveaddress($request);
+            if ($response instanceof RedirectResponse) {
+                return $response; // Stop execution and return the validation error response
+            }
         }else{
             $userID = Auth::id();
             $address_id = $request->addrradio;

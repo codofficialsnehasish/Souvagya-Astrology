@@ -1,9 +1,9 @@
 <!--start sidebar-->
 <aside class="sidebar-wrapper" data-simplebar="true">
 
-    <div class="sidebar-header">
+    <div class="sidebar-header" style="justify-content: center;">
         <div class="logo-icon">
-            <img src="{{ optional(general_settings())->getFirstMediaUrl('logo') ?? '' }}" class="logo-img" alt="">
+            <img src="{{ optional(general_settings())->getFirstMediaUrl('logo') ?? '' }}" class="logo-img" alt="" style="background: black;filter: drop-shadow(10px 10px 20px rgba(125, 0, 0, 0.5));">
         </div>
         {{-- <div class="logo-name flex-grow-1">
             <h5 class="mb-0">Souvagya</h5>

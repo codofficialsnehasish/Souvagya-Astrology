@@ -27,15 +27,15 @@
                     <div class="card w-100">
                         <div class="card-body">
                             <h5 class="mb-3 fw-bold text-center">Client Details</h5>
-                            <div class="position-relative">
+                            <div class="d-flex justify-content-center">
                                 <!-- <img src="assets/images/gallery/18.png" class="img-fluid rounded" alt=""> -->
                                 @if(!empty($booking->user->profile_image))
-                                <div class="position-absolute top-100 start-50 translate-middle">
+                                
                                     <img src="{{ asset($booking->user->profile_image) }}" width="100" height="100" class="rounded-circle raised p-1 bg-white" alt="">
-                                </div>
+                             
                                 @endif
                             </div>
-                            <div class="mt-5 pt-4">
+                            <div class="mt-2 pt-4">
                                 <h6 class="mb-3">Name : {{ $booking->user->name }}</h6>
                                 <h6 class="mb-3">Email : {{ $booking->user->email }}</h6>
                                 <h6 class="mb-3">Phone : {{ $booking->user->phone }}</h6>
