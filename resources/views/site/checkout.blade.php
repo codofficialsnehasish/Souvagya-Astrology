@@ -62,12 +62,12 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Phone*" name="phone" value="{{ old('phone') }}" class="form-control" required>
+                                            <input type="tel" maxlength="10" minlength="10" placeholder="Phone*" name="phone" value="{{ old('phone') }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Email*" name="email" id="checkout-email" value="{{ old('email') }}" class="form-control" required>
+                                            <input type="email" placeholder="Email*" name="email" id="checkout-email" value="{{ old('email') }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 text-dark" id="verification_code_div" style="display:none;">
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 ">
                                         <div class="form-group as_select_box ">
-                                            <select class="form-control checkout-color" id="country_id" name="country" required>
+                                            <select class="form-control checkout-color" data-placeholder="Select Country" id="country_id" name="country" required>
                                                 @foreach($countrys as $country)
                                                 <option class="checkout-color" value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
@@ -86,21 +86,21 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group as_select_box">
-                                            <select class="form-control" id="states_id" name="state" required>
+                                            <select class="form-control" id="states_id" data-placeholder="Select State" name="state" required>
                                                 <option value="">Select Country</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group as_select_box">
-                                            <select class="form-control" id="citys_id" name="city" required>
+                                            <select class="form-control" id="citys_id" data-placeholder="Select City" name="city" required>
                                                 <option value="">Select State</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Pincode*" name="pincode" value="{{ old('pincode') }}" class="form-control" required>
+                                            <input type="tel" maxlength="6" minlength="6" placeholder="Pincode*" name="pincode" value="{{ old('pincode') }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">

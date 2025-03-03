@@ -56,10 +56,10 @@ class Checkout extends Controller
 
     protected function saveaddress(Request $request){
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
-            'last_name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
+            'first_name' => 'required|max:255', //|regex:/^[a-zA-Z\s]+$/
+            'last_name' => 'required|max:255', //|regex:/^[a-zA-Z\s]+$/
             'email' => 'required|email',
-            'phone' => 'required|digits:10|regex:/^[6789]/',
+            'phone' => 'required|digits:10', //regex:/^[6789]/
             'country' => 'required|exists:countries,id',
             'state' => 'required|exists:states,id',
             'city' => 'nullable|exists:cities,id',

@@ -124,10 +124,10 @@
                                 <input type="text" name="name" placeholder="Enter name" class="form-control" id="" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="mobile" placeholder="Enter mobile number" class="form-control" id="" required>
+                                <input type="tel" maxlength="10" minlength="10" name="mobile" placeholder="Enter mobile number" class="form-control" id="" required>
                             </div>
                             <div class="form-group">
-                                <select name="gender" class="form-control" id="">
+                                <select name="gender" class="form-control" id="" required>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
